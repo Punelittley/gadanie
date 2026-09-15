@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АРКАНУМ — Мастерская осознанного Таро и глубинного анализа</title>
+    <meta name="description" content="Осознанные консультации Таро и психологические расклады. Интерактивная 3D колода карт, расклады на отношения, профессиональный рост и выбор пути. В строгом соответствии с законодательством РФ.">
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Векторные иконки FontAwesome (строго без смайликов и эмодзи) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Оптимизированные стили -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+    <!-- Верхний информационный и правовой бар -->
+    <div class="top-legal-bar">
+        <div class="container top-legal-inner">
+            <div class="moon-widget" id="current-moon-phase">
+                <i class="fas fa-moon" style="color: var(--gold-400);"></i> <span>Синхронизация с лунным циклом...</span>
+            </div>
+            <div class="legal-info-badge-wrap">
+                <span>Информационно-развлекательные услуги</span>
+                <span class="legal-badge-18">18+</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         ШАПКА САЙТА (HEADER)
+         ========================================================================== -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <svg class="logo-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M12 3v18"></path>
+                    <path d="M3 12h18"></path>
+                    <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
+                </svg>
+                <div class="logo-text">АРКАНУМ <span>ТАРО</span></div>
+            </a>
+
+            <nav class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="#services" class="nav-link">Услуги</a></li>
+                    <li><a href="#interactive-divination-ritual" class="nav-link">Расклад</a></li>
+                    <li><a href="#authenticity" class="nav-link">Подлинность</a></li>
+                    <li><a href="#about" class="nav-link">О мастере</a></li>
+                    <li><a href="#reviews" class="nav-link">Отзывы</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="reading.html" class="nav-link nav-link-sample"><i class="fas fa-scroll"></i> Пример отчета</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="btn btn-gold btn-sm order-service-btn" data-service="Персональный расклад">
+                    <i class="fas fa-feather-pointed"></i> Заказать разбор
+                </button>
+                <button class="mobile-toggle" aria-label="Открыть меню">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+         ГЛАВНЫЙ ЭКРАН (HERO)
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-pulse"></span>
+                    <span>Психологическое Таро • Строго без фатализма и запугивания</span>
+                </div>
+                <h1 class="hero-title">
+                    Ясность в решениях <br>через <span class="gold-text">язык Арканов</span>
+                </h1>
+                <p class="hero-description">
+                    Таро — это зеркало вашего подсознания и инструмент навигации в запутанных жизненных ситуациях. 
+                    Честные ответы на вопросы отношений, финансов и призвания с подробным аудио- и фото-отчетом мастера.
+                </p>
+
+                <div class="hero-ctas">
+                    <a href="#interactive-divination-ritual" class="btn btn-gold" id="hero-draw-btn">
+                        <i class="fas fa-wand-magic-sparkles"></i> ✦ Провести расклад ✦
+                    </a>
+                    <a href="#services" class="btn btn-glass">
+                        <i class="fas fa-scroll"></i> Каталог тарифов
+                    </a>
+                </div>
+
+                <div class="hero-trust-row">
+                    <div class="trust-item">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>Конфиденциально по 152-ФЗ</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Готовность за 24 часа</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-receipt"></i>
+                        <span>Чек плательщика НПД</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Интерактивная 3D Колода (Three.js 60fps) -->
+            <div class="hero-3d-wrapper">
+                <div class="hero-3d-box">
+                    <div id="threejs-canvas-container" class="canvas-container"></div>
+                </div>
+                <!-- Аккуратный призыв под колодой (не перекрывает карту!) -->
+                <div class="hero-card-callout" id="canvas-cta-btn">
+                    <i class="fas fa-hand-sparkles"></i> <span>Коснитесь колоды, чтобы вытянуть Аркан</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         ИНТЕРАКТИВНЫЙ РИТУАЛ ГАДАНИЯ (4 ШАГА С ВЕЕРОМ КАРТ)
+         ========================================================================== -->
+    <section class="ritual-section" id="interactive-divination-ritual">
+        <div class="container">
+            <div class="section-header reveal-on-scroll">
+                <div class="section-badge">Персональный ритуал гадания</div>
+                <h2 class="section-title">Интерактивный расклад <span class="gold-text">на колоде Арканов</span></h2>
+                <div class="ornament-divider">✦ ❖ ✦</div>
+                <p class="section-subtitle">
+                    Здесь нет случайных генераторов. Вы настраиваете свой личный архетип, а затем своими руками выбираете 3 карты из разложенного веера.
+                </p>
+            </div>
+
+            <!-- ШАГ 1: ВЫБОР СФЕРЫ И ДАННЫХ -->
+            <div class="ritual-step-container active" id="ritual-step-1">
+                <div class="ritual-setup-card">
+                    <h3 class="gold-text" style="font-family: var(--font-heading); font-size: 1.35rem; margin-bottom: 8px; text-align: center;">
+                        Шаг 1: Выберите тему запроса и настройте фокус
+                    </h3>
+                    <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">
+                        Определите вектор ситуации, в которой вы хотите получить предельную ясность
+                    </p>
+
+                    <div class="sphere-selector-grid">
+                        <button type="button" class="sphere-select-btn active" data-sphere="love">
+                            <div class="sphere-icon-box"><i class="fas fa-heart"></i></div>
+                            <div class="sphere-text">
+                                <h4>Любовь и союз</h4>
+                                <p>Истинные мысли и мотивы партнера, скрытые точки трения, потенциал отношений</p>
+                            </div>
+                        </button>
+
+                        <button type="button" class="sphere-select-btn" data-sphere="finance">
+                            <div class="sphere-icon-box"><i class="fas fa-coins"></i></div>
+                            <div class="sphere-text">
+                                <h4>Финансы и карьера</h4>
+                                <p>Оценка денежного потока, риски в проектах, стратегический выбор вектора</p>
+                            </div>
+                        </button>
+
+                        <button type="button" class="sphere-select-btn" data-sphere="choice">
+                            <div class="sphere-icon-box"><i class="fas fa-compass"></i></div>
+                            <div class="sphere-text">
+                                <h4>Тупик и выбор пути</h4>
+                                <p>Анализ сложной развилки, снятие внутренних сомнений, верное решение</p>
+                            </div>
+                        </button>
+
+                        <button type="button" class="sphere-select-btn" data-sphere="destiny">
+                            <div class="sphere-icon-box"><i class="fas fa-sun"></i></div>
+                            <div class="sphere-text">
+                                <h4>Предназначение</h4>
+                                <p>Раскрытие природного архетипа личности, скрытые таланты и трансформация</p>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="ritual-form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="ritual-user-name">
+                                <span>Ваше имя</span>
+                                <span class="required-star">*</span>
+                            </label>
+                            <input type="text" id="ritual-user-name" class="form-input" placeholder="Как к вам обращаться (например: Екатерина)" value="" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="ritual-birth-date">
+                                <span>Дата рождения</span>
+                                <span class="label-hint">(нумерология)</span>
+                                <span class="required-star">*</span>
+                            </label>
+                            <input type="date" id="ritual-birth-date" class="form-input" value="" required>
+                        </div>
+                    </div>
+
+                    <!-- Блок валидации и ошибок -->
+                    <div id="ritual-step1-error" class="ritual-input-error" style="display: none;"></div>
+
+                    <div style="text-align: center;">
+                        <button type="button" class="btn btn-gold" id="start-ritual-btn" style="padding: 14px 36px; font-size: 1.05rem;">
+                            <i class="fas fa-wand-magic-sparkles"></i> ✦ Начать калибровку и проверить резонанс ✦
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ШАГ 2: ПРОВЕРКА ПРОШЛОГО (КАЛИБРОВКА РЕЗОНАНСА) -->
+            <div class="ritual-step-container" id="ritual-step-2">
+                <div class="resonance-check-card">
+                    <div class="resonance-top-row">
+                        <div class="resonance-badge" id="resonance-user-badge">
+                            Калибровка поля
+                        </div>
+                        <div class="resonance-meter-box">
+                            <span style="font-size: 0.78rem; color: var(--text-muted);">Точность синхронизации:</span>
+                            <div class="resonance-bar-track">
+                                <div class="resonance-bar-fill" id="resonance-meter-fill"></div>
+                            </div>
+                            <span class="resonance-meter-val" id="resonance-meter-percent">97%</span>
+                        </div>
+                    </div>
+
+                    <div class="resonance-content-box">
+                        <div class="resonance-icon-wrap">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="resonance-texts">
+                            <h3 class="gold-text" style="font-family: var(--font-heading); font-size: 1.35rem; margin-bottom: 8px;">
+                                Проверка настройки: события ваших последних 1–2 месяцев
+                            </h3>
+                            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+                                Перед тем как делать расклад на будущее, колода сонастраивается с вашим недавним прошлым:
+                            </p>
+                            <div class="resonance-quote-bubble">
+                                <p id="resonance-past-text">
+                                    В последние 4–6 недель вы пережили неприятный момент охлаждения или невыполненного обещания со стороны партнера. Вы ощутили, что вкладываете в диалог больше душевных сил, чем получаете взамен.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resonance-actions-row">
+                        <div style="font-size: 0.85rem; color: var(--gold-300);">
+                            <i class="fas fa-check-double"></i> Если это откликается — энергетический контакт подтвержден
+                        </div>
+                        <button type="button" class="btn btn-gold" id="confirm-past-resonance-btn" style="padding: 14px 32px;">
+                            <i class="fas fa-check"></i> ✦ Да, это в точности про меня — продолжить ✦
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ШАГ 3: УТОЧНЯЮЩИЕ ВОПРОСЫ (АНАМНЕЗ СИТУАЦИИ) -->
+            <div class="ritual-step-container" id="ritual-step-3">
+                <div class="anamnesis-card">
+                    <div style="text-align: center; margin-bottom: 24px;">
+                        <div class="section-badge">Сбор контекста</div>
+                        <h3 class="gold-text" id="anamnesis-title" style="font-family: var(--font-heading); font-size: 1.4rem; margin-top: 6px;">
+                            Уточнение запроса
+                        </h3>
+                        <p style="font-size: 0.88rem; color: var(--text-muted);">
+                            Мастер не гадает вслепую. Ответы позволят истолковать выпавшие Арканы максимально точечно.
+                        </p>
+                    </div>
+
+                    <div class="anamnesis-block">
+                        <label class="anamnesis-label"><i class="fas fa-clock"></i> Как давно длится эта ситуация?</label>
+                        <div class="pills-grid">
+                            <button type="button" class="pill-btn dur-pill-btn" data-dur="Несколько дней">Несколько дней (резкий инцидент)</button>
+                            <button type="button" class="pill-btn dur-pill-btn active" data-dur="1–3 месяца">1–3 месяца (активная фаза)</button>
+                            <button type="button" class="pill-btn dur-pill-btn" data-dur="Более полугода">Более полугода (затяжной узел)</button>
+                        </div>
+                    </div>
+
+                    <div class="anamnesis-block">
+                        <label class="anamnesis-label"><i class="fas fa-shield-halved"></i> В чем ваш главный внутренний страх в этом вопросе?</label>
+                        <div class="pills-grid">
+                            <button type="button" class="pill-btn fear-pill-btn active" data-fear="Сделать неверный шаг">Сделать неверный шаг</button>
+                            <button type="button" class="pill-btn fear-pill-btn" data-fear="Быть обманутым или отвергнутым">Быть обманутым / отвергнутым</button>
+                            <button type="button" class="pill-btn fear-pill-btn" data-fear="Потерять стабильность">Потерять стабильность и ресурсы</button>
+                            <button type="button" class="pill-btn fear-pill-btn" data-fear="Застрять в неизвестности">Застрять в неопределенности</button>
+                        </div>
+                    </div>
+
+                    <div class="anamnesis-block">
+                        <label class="anamnesis-label" for="anamnesis-notes"><i class="fas fa-pen-nib"></i> Кратко суть вопроса своими словами (по желанию):</label>
+                        <textarea id="anamnesis-notes" class="form-textarea" style="min-height: 80px;" placeholder="Например: Имя партнера Андрей. Хочу понять, стоит ли идти на примирение или завершать союз."></textarea>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 24px;">
+                        <button type="button" class="btn btn-gold" id="to-fan-deck-btn" style="padding: 14px 36px; font-size: 1.05rem;">
+                            <i class="fas fa-shuffle"></i> ✦ Зафиксировать и перейти к выбору карт ✦
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ШАГ 4: ИНТЕРАКТИВНЫЙ ВЕЕР ИЗ 22 КАРТ -->
+            <div class="ritual-step-container" id="ritual-step-4">
+                <div class="fan-deck-board">
+                    <div class="fan-instructions-bar">
+                        <div>
+                            <h4 style="font-family: var(--font-heading); color: var(--gold-100); margin-bottom: 4px;">
+                                Выберите 3 карты своими руками
+                            </h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">
+                                Прикоснитесь к любым трем картам из веера. Доверьтесь первому импульсу.
+                            </p>
+                        </div>
+                        <div class="fan-picked-badge" id="fan-picked-count">
+                            Выбрано 0 из 3 карт
+                        </div>
+                    </div>
+
+                    <!-- Интерактивный веер карт -->
+                    <div class="tarot-fan-container" id="tarot-fan-deck">
+                        <!-- Динамически заполняется картами в скрипте -->
+                    </div>
+
+                    <!-- 3 слота для выбранных карт -->
+                    <div class="picked-slots-grid">
+                        <div class="picked-slot-item">
+                            <div class="picked-slot-title" id="picked-slot-label-1">Позиция I: Исток ситуации</div>
+                            <div class="picked-slot-box" id="picked-slot-1">
+                                <div class="picked-slot-empty">
+                                    <div class="slot-plus-icon">+</div>
+                                    <span>Выберите 1-ю карту</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="picked-slot-item">
+                            <div class="picked-slot-title" id="picked-slot-label-2">Позиция II: Точка напряжения</div>
+                            <div class="picked-slot-box" id="picked-slot-2">
+                                <div class="picked-slot-empty">
+                                    <div class="slot-plus-icon">+</div>
+                                    <span>Выберите 2-ю карту</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="picked-slot-item">
+                            <div class="picked-slot-title" id="picked-slot-label-3">Позиция III: Вектор и совет</div>
+                            <div class="picked-slot-box" id="picked-slot-3">
+                                <div class="picked-slot-empty">
+                                    <div class="slot-plus-icon">+</div>
+                                    <span>Выберите 3-ю карту</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button type="button" class="btn btn-disabled" id="open-spread-btn" disabled style="padding: 14px 40px; font-size: 1.05rem;">
+                            <i class="fas fa-lock"></i> Выберите 3 карты из веера выше
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ШАГ 5: РАСКРЫТИЕ РЕЗУЛЬТАТА ТРИАДЫ КАРТ + ИНТЕРАКТИВНЫЙ ИИ-СОБЕСЕДНИК -->
+            <div class="ritual-step-container" id="ritual-step-5">
+                <div class="step4-layout">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <div class="section-badge">Персональный расклад</div>
+                        <h3 class="gold-text" style="font-family: var(--font-heading); font-size: 1.8rem; margin-top: 10px;">
+                            Карты вашего личного расклада
+                        </h3>
+                    </div>
+
+                    <!-- 3 раскрытые карты -->
+                    <div class="step4-cards-grid">
+                        <div id="step5-card-1"></div>
+                        <div id="step5-card-2"></div>
+                        <div id="step5-card-3"></div>
+                    </div>
+
+                    <!-- Интерактивный диалоговый модуль мастера Александры (ИИ-собеседник) -->
+                    <div class="ai-consultation-chat-card">
+                        <div class="chat-header-bar">
+                            <div class="chat-master-info">
+                                <div class="master-live-avatar">
+                                    <i class="fas fa-eye" style="font-size: 1rem; color: var(--gold-300);"></i>
+                                    <span class="live-dot" title="В сети"></span>
+                                </div>
+                                <div>
+                                    <h4 class="master-chat-name">
+                                        Мастер Таро • Онлайн-разбор <i class="fas fa-circle-check tg-verified-icon"></i>
+                                    </h4>
+                                    <span class="master-chat-status">В сети • Индивидуальный анализ выбранных вами карт</span>
+                                </div>
+                            </div>
+                            <div class="chat-secure-badge">
+                                <i class="fas fa-lock"></i> Защищенный диалог
+                            </div>
+                        </div>
+
+                        <!-- Сообщения чата -->
+                        <div class="chat-messages-container" id="ai-chat-messages">
+                            <!-- Заполняется динамически -->
+                        </div>
+
+                        <!-- Быстрые вопросы-подсказки -->
+                        <div class="chat-quick-prompts">
+                            <span style="font-size: 0.78rem; color: var(--text-muted); margin-right: 6px;">Быстрый вопрос:</span>
+                            <button type="button" class="quick-prompt-btn" onclick="document.getElementById('ai-chat-input').value = this.innerText; document.getElementById('ai-chat-form').requestSubmit();">
+                                Стоит ли мне сделать первый шаг?
+                            </button>
+                            <button type="button" class="quick-prompt-btn" onclick="document.getElementById('ai-chat-input').value = this.innerText; document.getElementById('ai-chat-form').requestSubmit();">
+                                Что партнер на самом деле чувствует?
+                            </button>
+                            <button type="button" class="quick-prompt-btn" onclick="document.getElementById('ai-chat-input').value = this.innerText; document.getElementById('ai-chat-form').requestSubmit();">
+                                Какой главный совет дают Арканы?
+                            </button>
+                        </div>
+
+                        <!-- Форма ввода сообщения -->
+                        <form id="ai-chat-form" class="chat-input-form">
+                            <input type="text" id="ai-chat-input" class="chat-text-input" placeholder="Напишите ваш личный вопрос по выпавшим картам..." required autocomplete="off">
+                            <button type="submit" class="chat-send-btn" aria-label="Отправить вопрос">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Синтез и действия -->
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 30px;">
+                        <a href="reading.html?from=ritual" class="btn btn-gold" style="padding: 14px 36px; font-size: 1.02rem;">
+                            <i class="fas fa-scroll"></i> ✦ Открыть полный протокол расклада (reading.html) ✦
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         КАТАЛОГ УСЛУГ И ФИКСИРОВАННЫЕ ЦЕНЫ
+         ========================================================================== -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="section-header reveal-on-scroll">
+                <div class="section-badge">Прозрачные фиксированные тарифы</div>
+                <h2 class="section-title">Каталог консультаций <span class="gold-text">и раскладов</span></h2>
+                <div class="ornament-divider">✦ ❖ ✦</div>
+                <p class="section-subtitle">
+                    Без навязанных услуг, доплат за «чистку» и мнимых угроз. Полная фиксированная стоимость до начала консультации.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Тариф 1 -->
+                <div class="service-card">
+                    <div class="service-icon-wrap"><i class="fas fa-sun"></i></div>
+                    <h3 class="service-title">Карта Дня с разбором</h3>
+                    <p class="service-desc">
+                        Точечный ответ на один конкретный вопрос дня или выбор из двух вариантов. Оптимально для первого знакомства с методикой мастера.
+                    </p>
+                    <ul class="service-features">
+                        <li class="service-feature-item"><i class="fas fa-check"></i> 1 конкретный запрос</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Четкое фото выпавших карт</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Голосовое сообщение (5–7 минут)</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Срок: до 4–6 часов</li>
+                    </ul>
+                    <div class="service-price-block">
+                        <div class="service-price">490 ₽</div>
+                        <div class="service-price-sub">Фиксированная цена • Электронный чек</div>
+                    </div>
+                    <button class="btn btn-glass order-service-btn" data-service="Карта Дня с разбором (490 ₽)">
+                        Выбрать тариф
+                    </button>
+                </div>
+
+                <!-- Тариф 2 -->
+                <div class="service-card popular">
+                    <div class="popular-badge">Востребованный</div>
+                    <div class="service-icon-wrap"><i class="fas fa-gem"></i></div>
+                    <h3 class="service-title">Анализ Отношений и Союза</h3>
+                    <p class="service-desc">
+                        Глубокое исследование динамики пары: истинные чувства и скрытые мотивы партнера, точки напряжения и потенциал союза.
+                    </p>
+                    <ul class="service-features">
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Мысли, чувства и намерения партнера</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Прогноз развития отношений на 3–6 месяцев</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Совет по гармонизации взаимодействия</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Аудиоразбор + конспект + фото расклада</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> 1 уточняющий вопрос включен</li>
+                    </ul>
+                    <div class="service-price-block">
+                        <div class="service-price">1 900 ₽</div>
+                        <div class="service-price-sub">Фиксированная цена • Электронный чек</div>
+                    </div>
+                    <button class="btn btn-gold order-service-btn" data-service="Анализ Отношений (1 900 ₽)">
+                        Разобрать отношения
+                    </button>
+                </div>
+
+                <!-- Тариф 3 -->
+                <div class="service-card">
+                    <div class="service-icon-wrap"><i class="fas fa-compass"></i></div>
+                    <h3 class="service-title">Карьера, Проекты и Финансы</h3>
+                    <p class="service-desc">
+                        Стратегический аудит профессиональной сферы: смена деятельности, запуск проекта, финансовые перспективы и риски.
+                    </p>
+                    <ul class="service-features">
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Сравнение двух вариантов развития</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Анализ скрытых финансовых рисков</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Взаимоотношения с партнерами/руководством</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Структурированный разбор (15–20 мин)</li>
+                    </ul>
+                    <div class="service-price-block">
+                        <div class="service-price">2 400 ₽</div>
+                        <div class="service-price-sub">Фиксированная цена • Электронный чек</div>
+                    </div>
+                    <button class="btn btn-glass order-service-btn" data-service="Карьера и Финансы (2 400 ₽)">
+                        Разобрать карьеру
+                    </button>
+                </div>
+
+                <!-- Тариф 4 -->
+                <div class="service-card">
+                    <div class="service-icon-wrap"><i class="fas fa-scroll"></i></div>
+                    <h3 class="service-title">Годовой Прогноз (12 Сфер)</h3>
+                    <p class="service-desc">
+                        Фундаментальный архетипический разбор года по ключевым жизненным сферам (здоровье, финансы, карьера, семья, личный рост).
+                    </p>
+                    <ul class="service-features">
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Помесячная траектория года</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> 12 секторов жизненного баланса</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Оформленный PDF-документ + аудиосопровождение</li>
+                        <li class="service-feature-item"><i class="fas fa-check"></i> Срок подготовки: 48 часов</li>
+                    </ul>
+                    <div class="service-price-block">
+                        <div class="service-price">4 900 ₽</div>
+                        <div class="service-price-sub">Фиксированная цена • Электронный чек</div>
+                    </div>
+                    <button class="btn btn-glass order-service-btn" data-service="Годовой Прогноз (4 900 ₽)">
+                        Заказать прогноз
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         ПОРЯДОК РАБОТЫ (3 ШАГА ОНЛАЙН-РАСКЛАДА)
+         ========================================================================== -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header reveal-on-scroll">
+                <div class="section-badge">Прозрачный регламент</div>
+                <h2 class="section-title">Как устроен <span class="gold-text">онлайн-расклад</span></h2>
+                <div class="ornament-divider">✦ ❖ ✦</div>
+                <p class="section-subtitle">
+                    Никаких звонков и ожидания. Вы сами выбираете карты из интерактивной колоды и сразу получаете глубокий разбор.
+                </p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <span class="step-num">01</span>
+                    <div class="step-icon-wrap"><i class="fas fa-bullseye"></i></div>
+                    <h4 class="step-title">Настройка фокуса</h4>
+                    <p class="step-desc">
+                        Вы указываете сферу ситуации, имя и дату рождения. Система рассчитывает ваш Аркан Судьбы и калибрует недавние события для проверки резонанса.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <span class="step-num">02</span>
+                    <div class="step-icon-wrap"><i class="fas fa-hand-pointer"></i></div>
+                    <h4 class="step-title">Выбор карт на сайте</h4>
+                    <p class="step-desc">
+                        Вы лично достаете 3 карты из 22 Старших Арканов в интерактивном веере на сайте — именно ваша рука и интуиция определяют выпавшие символы.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <span class="step-num">03</span>
+                    <div class="step-icon-wrap"><i class="fas fa-scroll"></i></div>
+                    <h4 class="step-title">Глубинный разбор</h4>
+                    <p class="step-desc">
+                        Мгновенный персональный синтез триады с психологическим анализом, интерактивным диалогом по выпавшим картам и сохранением отчета в личный кабинет.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         СЕКЦИЯ ПОДЛИННОСТИ (ДОКАЗАТЕЛЬСТВА ДОВЕРИЯ)
+         ========================================================================== -->
+    <section class="authenticity-section" id="authenticity">
+        <div class="container">
+            <div class="section-header reveal-on-scroll">
+                <div class="section-badge">Осознанный подход</div>
+                <h2 class="section-title">Почему наш онлайн-расклад <span class="gold-text">действительно точен</span></h2>
+                <div class="ornament-divider">✦ ❖ ✦</div>
+                <p class="section-subtitle">
+                    Честная механика: вы сами вытягиваете карты в прямом эфире, а архетипический анализ опирается на ваш индивидуальный нумерологический код.
+                </p>
+            </div>
+
+            <!-- Честная сравнительная таблица -->
+            <div class="honesty-table-wrapper reveal-on-scroll">
+                <h3 class="gold-text" style="font-family: var(--font-heading); font-size: 1.35rem; margin-bottom: 20px; text-align: center;">
+                    Почему доверяют «АРКАНУМ ТАРО», а не шаблонным сайтам
+                </h3>
+                
+                <div class="honesty-grid-table">
+                    <div class="honesty-col-header" style="color: var(--text-muted);">Критерий оценки</div>
+                    <div class="honesty-col-header" style="color: #f87171;"><i class="fas fa-xmark"></i> Обычные сайты-генераторы</div>
+                    <div class="honesty-col-header" style="color: #34d399;"><i class="fas fa-check"></i> Наша платформа АРКАНУМ</div>
+
+                    <div class="honesty-row">
+                        <div class="honesty-cell" style="font-weight: 600;">Выбор карт</div>
+                        <div class="honesty-cell" style="color: var(--text-muted);">Скрытый скрипт выдает заранее заготовленный текст</div>
+                        <div class="honesty-cell" style="color: var(--gold-200);">Интерактивный веер 22 Арканов: вы сами нажимаете и выбираете каждую карту</div>
+                    </div>
+
+                    <div class="honesty-row">
+                        <div class="honesty-cell" style="font-weight: 600;">Персонализация</div>
+                        <div class="honesty-cell" style="color: var(--text-muted);">Один и тот же шаблон для всех пользователей</div>
+                        <div class="honesty-cell" style="color: var(--gold-200);">Индивидуальный расчет Аркана Судьбы по дате рождения и калибровка прошлого</div>
+                    </div>
+
+                    <div class="honesty-row">
+                        <div class="honesty-cell" style="font-weight: 600;">Этика и честность</div>
+                        <div class="honesty-cell" style="color: var(--text-muted);">Запугивание «порчей» и вымогательство денег за «чистки»</div>
+                        <div class="honesty-cell" style="color: var(--gold-200);">Строго без запугивания. Психологический вектор решений и уважение к выбору</div>
+                    </div>
+
+                    <div class="honesty-row">
+                        <div class="honesty-cell" style="font-weight: 600;">Юридический статус</div>
+                        <div class="honesty-cell" style="color: var(--text-muted);">Анонимный сайт без реквизитов и ответственности</div>
+                        <div class="honesty-cell" style="color: var(--gold-200);">Официальный статус самозанятого РФ, фискальный чек ФНС по 422-ФЗ, защита по 152-ФЗ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         О МАСТЕРЕ / ЭТИЧЕСКИЙ КОДЕКС
+         ========================================================================== -->
+    <section class="about-section" id="about">
+        <div class="container about-grid">
+            <div class="about-avatar-box reveal-on-scroll">
+                <div class="about-avatar-frame">
+                    <div class="about-avatar-icon"><i class="fas fa-user-shield"></i></div>
+                    <h3 class="gold-text" style="font-family: var(--font-heading); margin-bottom: 6px;">Александра</h3>
+                    <p style="color: var(--purple-300); font-size: 0.88rem;">Практик архетипического Таро</p>
+                    <div class="about-avatar-badge">
+                        <i class="fas fa-feather-pointed"></i> 7+ лет практики
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-content reveal-on-scroll">
+                <div class="section-badge">Профессиональная этика</div>
+                <h2>Таро как ориентир, <span class="gold-text">а не фатальный приговор</span></h2>
+                <div class="ornament-divider" style="margin-left: 0;">✦ ❖ ✦</div>
+                <p class="about-text">
+                    Я не занимаюсь сомнительными оккультными обрядами, приворотами и запугиванием людей. Моя работа базируется на <strong>психологическом и аналитическом подходе к символам Таро</strong>.
+                </p>
+                <p class="about-text">
+                    Арканы показывают текущую тенденцию событий, обусловленную вашими действиями, установками и обстановкой. Будущее вариативно: моя цель — подсветить неочевидные факторы, чтобы вы приняли взвешенное решение.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         ОТЗЫВЫ КЛИЕНТОВ
+         ========================================================================== -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <div class="section-header reveal-on-scroll">
+                <div class="section-badge">Обратная связь</div>
+                <h2 class="section-title">Отзывы <span class="gold-text">клиентов</span></h2>
+                <div class="ornament-divider">✦ ❖ ✦</div>
+                <p class="section-subtitle">
+                    Честные впечатления людей, обратившихся за прояснением сложной ситуации
+                </p>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-quote">
+                        «Была в сложной ситуации неопределенности в личной жизни. Александра спокойно и структурно объяснила причины закрытости партнера. Через месяц события развились в точности по намеченной картине, но главное — ко мне вернулось душевное спокойствие.»
+                    </p>
+                    <div class="review-author-row">
+                        <span class="author-name">Екатерина, 29 лет</span>
+                        <span class="author-service">Анализ отношений</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-quote">
+                        «Понравилась трезвая подача без нагнетания мистики. Информация подается как на консультации у глубокого аналитика. Расклад по бизнес-проекту помог вовремя пересмотреть условия контракта с партнерами.»
+                    </p>
+                    <div class="review-author-row">
+                        <span class="author-name">Михаил, 37 лет</span>
+                        <span class="author-service">Карьера и Финансы</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-quote">
+                        «Брала годовой прогноз по 12 секторам. Очень удобно, что аудиозапись и PDF остались у меня: переслушивала в середине года, многие ориентиры сработали с поразительной точностью.»
+                    </p>
+                    <div class="review-author-row">
+                        <span class="author-name">Анна В., 33 года</span>
+                        <span class="author-service">Годовой прогноз</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         БЛОГ / СТАТЬИ
+         ========================================================================== -->
+    <section class="blog-section" id="blog">
+        <div class="container">
+            <div class="section-header reveal-on-scroll">
+                <div class="section-badge">Познавательный раздел</div>
+                <h2 class="section-title">Статьи об <span class="gold-text">осознанном Таро</span></h2>
+                <div class="ornament-divider">✦ ❖ ✦</div>
+                <p class="section-subtitle">
+                    Разбор мифов и правила экологичного взаимодействия с символическими системами
+                </p>
+            </div>
+
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-header-graphic"><i class="fas fa-hourglass-half"></i></div>
+                    <div class="blog-body">
+                        <span class="blog-tag">Методология</span>
+                        <h4 class="blog-title">Можно ли «прогадать» судьбу?</h4>
+                        <p class="blog-snippet">
+                            Почему ежедневные однотипные вопросы вызывают тревожность и как правильно соблюдать информационную гигиену при работе с картами.
+                        </p>
+                        <a href="#faq" class="blog-link">Подробнее в FAQ <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-header-graphic"><i class="fas fa-compass"></i></div>
+                    <div class="blog-body">
+                        <span class="blog-tag">Практика</span>
+                        <h4 class="blog-title">Как правильно ставить вопрос</h4>
+                        <p class="blog-snippet">
+                            Почему открытые развивающие формулировки дают в разы больше пользы, чем попытки угадать точные даты событий.
+                        </p>
+                        <a href="#faq" class="blog-link">Подробнее в FAQ <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card">
+                    <div class="blog-header-graphic"><i class="fas fa-shield-halved"></i></div>
+                    <div class="blog-body">
+                        <span class="blog-tag">Арканы</span>
+                        <h4 class="blog-title">Смысл Аркана Трансформации</h4>
+                        <p class="blog-snippet">
+                            Развенчиваем страх перед XIII Арканом: почему завершение старого этапа необходимо для качественного жизненного скачка.
+                        </p>
+                        <a href="#faq" class="blog-link">Подробнее в FAQ <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         FAQ (ЧАСТЫЕ ВОПРОСЫ)
+         ========================================================================== -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header reveal-on-scroll">
+                <div class="section-badge">Честные ответы</div>
+                <h2 class="section-title">Часто задаваемые <span class="gold-text">вопросы</span></h2>
+                <div class="ornament-divider">✦ ❖ ✦</div>
+                <p class="section-subtitle">
+                    Правовые и практические аспекты до оформления заказа
+                </p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Гарантируется ли 100% точность предсказания?</span>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Нет, и это прямо зафиксировано в пункте 2.3 нашей Публичной оферты.</strong> Услуги носят информационно-развлекательный и консультационный характер. Карты показывают наиболее вероятную тенденцию при сохранении текущих вводных. Ваша свободная воля всегда первична: меняя свои решения и действия, вы меняете исход ситуации.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>В какие сроки направляется готовый разбор?</span>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Базовый срок выполнения большинства раскладов — в течение <strong>24 часов</strong> с момента утверждения вопроса и оплаты. «Карта дня» направляется оперативнее — в течение 4–6 часов. Для больших годовых прогнозов срок составляет до 48 часов.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Возможны ли дополнительные требования оплаты?</span>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Исключено.</strong> Пункт 3.3 нашей Оферты категорически запрещает требовать дополнительные платежи под предлогом «снятия негатива», «устранения помех» или иных манипуляций. Стоимость выбранного тарифа фиксирована и окончательна.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Выдается ли официальный чек об оплате?</span>
+                        <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Да.</strong> Деятельность осуществляется в официальном статусе плательщика налога на профессиональный доход (НПД) в соответствии с Федеральным законом от 27.11.2018 № 422-ФЗ. После оплаты клиенту формируется электронный фискальный чек ФНС РФ через приложение «Мой налог».</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         ПОДВАЛ САЙТА (FOOTER С РЕКВИЗИТАМИ РФ)
+         ========================================================================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <svg class="logo-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M12 3v18"></path>
+                            <path d="M3 12h18"></path>
+                            <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
+                        </svg>
+                        <div class="logo-text">АРКАНУМ <span>ТАРО</span></div>
+                    </div>
+                    <p>
+                        Мастерская аналитического и архетипического Таро. Поиск ясности, саморефлексия и навигация в принятии ответственных решений.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Каталог консультаций</a></li>
+                        <li><a href="#daily-card">Карта дня</a></li>
+                        <li><a href="#how-it-works">Порядок работы</a></li>
+                        <li><a href="#about">О мастере</a></li>
+                        <li><a href="#reviews">Отзывы клиентов</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Правовой статус</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="open-offer-btn">Публичная оферта</a></li>
+                        <li><a href="#" class="open-privacy-btn">Политика конфиденциальности (152-ФЗ)</a></li>
+                        <li><a href="#faq">Условия оказания услуг</a></li>
+                        <li><a href="#faq">Порядок возврата средств</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Реквизиты и связь</h4>
+                    <div class="requisites-box">
+                        <p><strong>Исполнитель:</strong> [Ф.И.О.]</p>
+                        <p><strong>Статус:</strong> Самозанятый (плательщик НПД)</p>
+                        <p><strong>ИНН:</strong> [указать ИНН]</p>
+                        <p><strong>Связь:</strong> <a href="https://t.me/astral_tarot_master" target="_blank" style="color: var(--gold-300);">Telegram @astral_tarot_master</a></p>
+                        <p><strong>Режим:</strong> Пн–Вс с 10:00 до 21:00 (МСК)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-disclaimer">
+                    Услуги носят исключительно информационно-развлекательный характер для целей саморефлексии. Не являются предсказанием будущего в буквальном смысле, гарантией событий, медицинской, психиатрической, юридической или финансовой помощью. Лицам старше 18 лет.
+                </div>
+                <div>
+                    © 2026 АРКАНУМ ТАРО. Все права защищены.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+         МОДАЛЬНОЕ ОКНО: ЗАКАЗ РАСКЛАДА
+         ========================================================================== -->
+    <div class="modal-overlay" id="modal-order">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3 class="modal-title">Оформление заявки на консультацию</h3>
+                <button class="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="order-form">
+                    <div class="form-group">
+                        <label class="form-label" for="order-name">Ваше имя</label>
+                        <input type="text" id="order-name" class="form-input" placeholder="Как к вам обращаться" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="order-contact">Контакт для отправки расклада (Telegram / WhatsApp)</label>
+                        <input type="text" id="order-contact" class="form-input" placeholder="@username или +7 (999) 000-00-00" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="order-service-select">Тариф консультации</label>
+                        <select id="order-service-select" class="form-select">
+                            <option value="Карта Дня с разбором (490 ₽)">Карта Дня с разбором — 490 ₽</option>
+                            <option value="Анализ Отношений (1 900 ₽)">Анализ Отношений и Союза — 1 900 ₽</option>
+                            <option value="Карьера и Финансы (2 400 ₽)">Карьера, Проекты и Финансы — 2 400 ₽</option>
+                            <option value="Годовой Прогноз (4 900 ₽)">Большой Годовой Прогноз — 4 900 ₽</option>
+                            <option value="Индивидуальный вопрос">Индивидуальный вопрос</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="order-question">Краткое описание вашей ситуации</label>
+                        <textarea id="order-question" class="form-textarea" placeholder="Опишите вопрос, имена участников ситуации или варианты выбора"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="order-consent" required checked>
+                            <span>
+                                Я подтверждаю, что мне исполнилось 18 лет, я принимаю условия 
+                                <a href="#" class="open-offer-btn">Публичной оферты</a> и даю согласие на обработку данных по 
+                                <a href="#" class="open-privacy-btn">Политике конфиденциальности (152-ФЗ)</a>.
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-gold" style="width: 100%; margin-bottom: 12px;">
+                        <i class="fab fa-telegram-plane"></i> Направить заявку мастеру в Telegram
+                    </button>
+
+                    <button type="button" class="btn btn-glass" id="open-demo-reading-btn" style="width: 100%;">
+                        <i class="fas fa-credit-card"></i> Оплатить онлайн и открыть расклад
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         МОДАЛЬНОЕ ОКНО: ПУБЛИЧНАЯ ОФЕРТА (ТОЧНЫЙ ТЕКСТ СОГЛАСНО ЗАКОНУ РФ)
+         ========================================================================== -->
+    <div class="modal-overlay" id="modal-offer">
+        <div class="modal-window modal-window-lg">
+            <div class="modal-header">
+                <h3 class="modal-title">Публичная оферта на оказание услуг</h3>
+                <button class="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal-body legal-document">
+                <p><strong>Исполнитель:</strong> [Ф.И.О.], самозанятый (плательщик налога на профессиональный доход), ИНН [указать]</p>
+                <p><strong>Сайт:</strong> [указать домен]</p>
+                
+                <h3>1. Предмет оферты</h3>
+                <p>1.1. Исполнитель оказывает Заказчику информационно-развлекательные услуги в области гадания, таро, нумерологии и иных эзотерических практик (далее — «Услуги») через сайт [домен].</p>
+                <p>1.2. Оплата Услуг на сайте означает полное и безоговорочное согласие Заказчика с условиями настоящей оферты (акцепт в соответствии со ст. 438 ГК РФ).</p>
+
+                <h3>2. Характер услуг</h3>
+                <p>2.1. Услуги носят исключительно информационно-развлекательный характер и предназначены для саморефлексии, развлечения и получения альтернативного взгляда на ситуацию.</p>
+                <p>2.2. Услуги не являются:</p>
+                <ul>
+                    <li>предсказанием будущего в буквальном смысле;</li>
+                    <li>медицинской, психиатрической или психотерапевтической помощью;</li>
+                    <li>юридической или финансовой консультацией;</li>
+                    <li>гарантией наступления каких-либо событий.</li>
+                </ul>
+                <p>2.3. Исполнитель не гарантирует точность, достоверность или совпадение результата с реальными событиями. Результат носит вероятностный и субъективный характер.</p>
+                <p>2.4. Заказчику рекомендуется не принимать важные жизненные, финансовые, медицинские или юридические решения исключительно на основании результатов Услуг.</p>
+
+                <h3>3. Стоимость и порядок оплаты</h3>
+                <p>3.1. Стоимость Услуги фиксирована и указывается на сайте до момента оплаты.</p>
+                <p>3.2. Исполнитель не взимает дополнительных платежей за ранее оплаченную услугу. Любые дополнительные услуги (расширенный расклад, повторная консультация и т.п.) являются отдельными, добровольно выбираемыми Заказчиком услугами с заранее указанной ценой.</p>
+                <p>3.3. Исполнитель не вправе требовать дополнительной оплаты под предлогом «снятия негативных последствий», «устранения помех» или иных подобных условий как обязательного условия завершения ранее оплаченной услуги.</p>
+
+                <h3>4. Возврат средств</h3>
+                <p>4.1. Услуга считается оказанной в момент предоставления Заказчику результата (текста расклада/консультации).</p>
+                <p>4.2. Возврат возможен в случае технического сбоя, приведшего к неполучению результата, — в течение [3] дней с момента оплаты.</p>
+                <p>4.3. Возврат по причине несогласия с содержанием или несовпадения результата с ожиданиями не производится, поскольку Заказчик уведомлен о вероятностном характере Услуг согласно п. 2.3.</p>
+
+                <h3>5. Ответственность</h3>
+                <p>5.1. Исполнитель не несёт ответственности за решения, принятые Заказчиком на основании результатов Услуг.</p>
+                <p>5.2. Заказчик подтверждает, что ему исполнилось 18 лет и он действует по собственной воле.</p>
+
+                <h3>6. Персональные данные</h3>
+                <p>6.1. Обработка персональных данных Заказчика осуществляется в соответствии с Политикой конфиденциальности, размещённой на сайте.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         МОДАЛЬНОЕ ОКНО: ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ (152-ФЗ РФ)
+         ========================================================================== -->
+    <div class="modal-overlay" id="modal-privacy">
+        <div class="modal-window modal-window-lg">
+            <div class="modal-header">
+                <h3 class="modal-title">Политика конфиденциальности (152-ФЗ РФ)</h3>
+                <button class="modal-close" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal-body legal-document">
+                <h3>1. Общие положения</h3>
+                <p>Настоящая Политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности данных со стороны Исполнителя.</p>
+                <p>Исполнитель обеспечивает соблюдение прав и свобод граждан при обработке их персональных данных, включая защиту прав на неприкосновенность частной жизни.</p>
+
+                <h3>2. Состав обрабатываемых данных</h3>
+                <p>Исполнитель может обрабатывать следующие данные Заказчика, предоставленные при обращении:</p>
+                <ul>
+                    <li>Имя Заказчика;</li>
+                    <li>Идентификатор в мессенджере (Telegram / WhatsApp) либо номер телефона;</li>
+                    <li>Краткий текст описания вопроса для расклада;</li>
+                    <li>Обезличенные технические данные файлов cookie, собираемые браузером.</li>
+                </ul>
+
+                <h3>3. Цели обработки данных</h3>
+                <p>Персональные данные используются исключительно для:</p>
+                <ul>
+                    <li>Связи с Заказчиком и предоставления оплаченных информационно-развлекательных услуг;</li>
+                    <li>Направления фото-, аудио- и текстовых материалов расклада;</li>
+                    <li>Направления фискального чека плательщика налога на профессиональный доход (НПД).</li>
+                </ul>
+
+                <h3>4. Конфиденциальность</h3>
+                <p>Исполнитель гарантирует неразглашение персональных данных и содержания запросов Заказчика третьим лицам, за исключением случаев, прямо установленных законодательством РФ.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Библиотека Three.js для 3D сцены -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Скрипты сайта -->
+    <script src="scripts/tarot-art.js"></script>
+    <script src="scripts/tarot-data.js"></script>
+    <script src="scripts/three-scene.js"></script>
+    <script src="scripts/celestial-fx.js"></script>
+    <script src="scripts/divination-ritual.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
