@@ -207,53 +207,68 @@
 
                     <div style="text-align: center;">
                         <button type="button" class="btn btn-gold" id="start-ritual-btn" style="padding: 14px 36px; font-size: 1.05rem;">
-                            <i class="fas fa-wand-magic-sparkles"></i> ✦ Начать калибровку и проверить резонанс ✦
+                            <i class="fas fa-wand-magic-sparkles"></i> ✦ Перейти к сверке фокуса запроса ✦
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- ШАГ 2: ПРОВЕРКА ПРОШЛОГО (КАЛИБРОВКА РЕЗОНАНСА) -->
+            <!-- ШАГ 2: КАЛИБРОВКА ПОЛЯ (СВЕРКА ФОКУСА СИТУАЦИИ) -->
             <div class="ritual-step-container" id="ritual-step-2">
                 <div class="resonance-check-card">
                     <div class="resonance-top-row">
                         <div class="resonance-badge" id="resonance-user-badge">
-                            Калибровка поля
+                            <i class="fas fa-compass"></i> Калибровка фокуса
                         </div>
-                        <div class="resonance-meter-box">
-                            <span style="font-size: 0.78rem; color: var(--text-muted);">Точность синхронизации:</span>
-                            <div class="resonance-bar-track">
-                                <div class="resonance-bar-fill" id="resonance-meter-fill"></div>
-                            </div>
-                            <span class="resonance-meter-val" id="resonance-meter-percent">97%</span>
+                        <div class="resonance-status-box" id="resonance-status-indicator">
+                            <span class="pulse-dot"></span>
+                            <span class="status-label" id="resonance-status-text">Настройка фокуса...</span>
                         </div>
                     </div>
 
-                    <div class="resonance-content-box">
-                        <div class="resonance-icon-wrap">
-                            <i class="fas fa-bullseye"></i>
+                    <div class="focus-calibration-header" style="margin-bottom: 24px;">
+                        <h3 class="gold-text" style="font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 8px;">
+                            Прежде чем разложить карты, давайте сверим фокус
+                        </h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+                            Расклад точнее, когда понятен контекст ситуации, а не при гадании вслепую. Это не тест с «правильным» ответом, а честный ориентир для толкования Арканов.
+                        </p>
+                    </div>
+
+                    <div class="focus-question-box">
+                        <div class="focus-question-title" style="font-weight: 600; font-size: 0.98rem; margin-bottom: 14px; color: var(--gold-200);">
+                            <i class="fas fa-circle-question"></i> Что из этого сейчас ближе всего к вашей ситуации?
                         </div>
-                        <div class="resonance-texts">
-                            <h3 class="gold-text" style="font-family: var(--font-heading); font-size: 1.35rem; margin-bottom: 8px;">
-                                Проверка настройки: события ваших последних 1–2 месяцев
-                            </h3>
-                            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
-                                Перед тем как делать расклад на будущее, колода сонастраивается с вашим недавним прошлым:
-                            </p>
-                            <div class="resonance-quote-bubble">
-                                <p id="resonance-past-text">
-                                    В последние 4–6 недель вы пережили неприятный момент охлаждения или невыполненного обещания со стороны партнера. Вы ощутили, что вкладываете в диалог больше душевных сил, чем получаете взамен.
-                                </p>
-                            </div>
+                        <div class="focus-options-list" id="focus-options-container">
+                            <button type="button" class="focus-option-btn active" data-focus="Чувствую, что вкладываюсь больше, чем получаю взамен">
+                                <span class="option-radio"></span>
+                                <span class="option-text">Чувствую, что вкладываюсь в отношения или дело больше, чем получаю взамен</span>
+                            </button>
+                            <button type="button" class="focus-option-btn" data-focus="Жду решения или ответа от другого человека и это выматывает">
+                                <span class="option-radio"></span>
+                                <span class="option-text">Жду решения или ответа от другого человека, и это выматывает</span>
+                            </button>
+                            <button type="button" class="focus-option-btn" data-focus="Сомневаюсь, стоит ли продолжать то, во что уже вложено много сил">
+                                <span class="option-radio"></span>
+                                <span class="option-text">Сомневаюсь, стоит ли продолжать то, во что уже вложено много сил и времени</span>
+                            </button>
+                            <button type="button" class="focus-option-btn" data-focus="custom">
+                                <span class="option-radio"></span>
+                                <span class="option-text">Ничего из этого — опишу своими словами</span>
+                            </button>
+                        </div>
+
+                        <div id="focus-custom-wrap" style="display: none; margin-top: 16px;">
+                            <input type="text" id="focus-custom-input" class="form-input" placeholder="Коротко опишите, что сейчас происходит...">
                         </div>
                     </div>
 
-                    <div class="resonance-actions-row">
-                        <div style="font-size: 0.85rem; color: var(--gold-300);">
-                            <i class="fas fa-check-double"></i> Если это откликается — энергетический контакт подтвержден
+                    <div class="resonance-actions-row" style="margin-top: 26px;">
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">
+                            <i class="fas fa-shield-halved" style="color: var(--gold-400);"></i> Фокус будет учтен при анализе символизма Арканов
                         </div>
-                        <button type="button" class="btn btn-gold" id="confirm-past-resonance-btn" style="padding: 14px 32px;">
-                            <i class="fas fa-check"></i> ✦ Да, это в точности про меня — продолжить ✦
+                        <button type="button" class="btn btn-gold" id="confirm-past-resonance-btn" style="padding: 14px 34px;">
+                            <i class="fas fa-check"></i> ✦ Продолжить к выбору карт ✦
                         </button>
                     </div>
                 </div>

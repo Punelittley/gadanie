@@ -104,62 +104,6 @@
         }
     };
 
-    // 2. База данных «Проверка прошлого» (калибровка резонанса за последние 1–2 месяца)
-    const PAST_RESONANCE_DATA = {
-        love: [
-            "В последние 4–6 недель вы пережили неприятный момент охлаждения или невыполненного обещания со стороны партнера. Вы ощутили, что вкладываете в диалог больше душевных сил, чем получаете взамен. Внутри накопилось скрытое напряжение, о котором вы не решаетесь сказать вслух из страха спровоцировать конфликт.",
-            "Недавно вы поймали себя на ощущении эмоционального одиночества вдвоем. Словно между вами выросла невидимая стеклянная стена: бытовые разговоры идут, но глубокой доверительной теплоты стало меньше. Вас мучает вопрос, искренен ли человек до конца или что-то недоговаривает.",
-            "В недавнем прошлом произошел разговор или ситуация, которая заставила вас усомниться в будущем союза. Вы пытались сгладить углы и включить рассудок, но интуиция настойчиво подает сигналы, требуя определенности и расстановки точек над «i»."
-        ],
-        finance: [
-            "В течение последних двух месяцев вы столкнулись с ощущением «пробуксовки» или скрытых непредвиденных расходов. Вы приложили значительные усилия, однако отдача оказалась заметно ниже ожидаемой, что вызвало внутреннюю усталость и тревогу за финансовую стабильность.",
-            "Недавно вы пережили период сомнений в правильности своего текущего дела или условий сотрудничества. Появилось стойкое чувство, что ваши навыки и время обесцениваются, а ключевые решения принимаются без учета ваших интересов.",
-            "В последние недели возникла развилка: оставаться в привычной зоне комфорта с ограниченным доходом либо пойти на риск и сменить вектор. Страх потерять накопленное пока перевешивает желание сделать решительный шаг."
-        ],
-        choice: [
-            "В последние 3–5 недель вы находитесь в состоянии изнуряющего внутреннего диалога. Вы постоянно взвешиваете два взаимоисключающих сценария, но каждый раз находите контраргументы. Эта неопределенность отнимает львиную долю жизненных сил и мешает спать по ночам.",
-            "Недавно вы получили информацию или столкнулись с событием, которое разрушило ваши прежние планы. Приходится экстренно адаптироваться к новым обстоятельствам, не имея твердой почвы под ногами.",
-            "Вы чувствуете, что старый жизненный этап подошел к концу, но дверь в новый пока закрыта. Окружающие дают противоречивые советы, что лишь усиливает ощущение заблокированности и растерянности."
-        ],
-        destiny: [
-            "В последние месяцы вы ощутили глубокий кризис прежних ориентиров. То, что раньше радовало и мотивировало, сейчас кажется пустым и механическим. Внутри назрела острая потребность в подлинной реализации и смене окружения.",
-            "Недавно вы пережили отрезвляющее осознание: вы слишком долго жили ожиданиями других людей, жертвуя своими истинными талантами. Появилось желание сбросить чужие маски и заявить о себе без страха осуждения.",
-            "В недавнем прошлом вы столкнулись с ситуацией проверки на прочность, которая показала, кто из вашего окружения действительно готов быть рядом, а кто находился из корысти или привычки."
-        ]
-    };
-
-    // 3. Тексты сфер
-    const SPHERE_CONFIG = {
-        love: {
-            title: "Любовь и Отношения",
-            pos1: "Исток чувств и скрытые мотивы в союзе",
-            pos2: "Точка текущего напряжения между вами",
-            pos3: "Совет Арканов и вектор развития пары",
-            masterIntro: "В вопросах отношений символы карт вскрывают не поверхностные слова, а подсознательные страхи и намерения каждого из партнеров."
-        },
-        finance: {
-            title: "Деньги и Карьера",
-            pos1: "Фундамент вашего текущего дохода и положение дел",
-            pos2: "Скрытые финансовые утечки и риски",
-            pos3: "Точка максимального финансового роста и совет",
-            masterIntro: "Материальный поток всегда следует за ясностью фокуса. Арканы подсвечивают, где вы неосознанно теряете ресурс."
-        },
-        choice: {
-            title: "Тупик и Развилка Пути",
-            pos1: "Истинная причина возникшей неопределенности",
-            pos2: "Что удерживает вас от шага вперед (страх / долг)",
-            pos3: "Какой путь откроет гармоничный выход из кризиса",
-            masterIntro: "Любой тупик — это сигнал, что старые шаблоны мышления исчерпали себя. Карты помогают увидеть скрытую развилку."
-        },
-        destiny: {
-            title: "Предназначение и Личный Путь",
-            pos1: "Ваш ключевой врожденный потенциал",
-            pos2: "Главный урок текущего жизненного этапа",
-            pos3: "Вектор раскрытия вашей истинной силы",
-            masterIntro: "Следование своему архетипу снимает внутреннее сопротивление и открывает доступ к врожденным ресурсам личности."
-        }
-    };
-
     // Текущее состояние ритуала
     const state = {
         step: 1,
@@ -167,6 +111,8 @@
         userName: '',
         birthDate: '',
         destinyArcanaNum: 1,
+        // Сверка фокуса (без эффекта Барнума):
+        userFocus: 'Чувствую, что вкладываюсь больше, чем получаю взамен',
         // Анамнез ситуации:
         duration: '1–3 месяца',
         mainFear: 'Сделать неверный шаг',
@@ -282,7 +228,7 @@
         }
     }
 
-    // ШАГ 2: ПРОВЕРКА ПРОШЛОГО (КАЛИБРОВКА РЕЗОНАНСА)
+    // ШАГ 2: СВЕРКА ФОКУСА СИТУАЦИИ (ЧЕСТНАЯ КАЛИБРОВКА БЕЗ БАРНУМА)
     function goToStep2() {
         state.step = 2;
         hideAllSteps();
@@ -290,42 +236,60 @@
         if (!step2El) return;
         step2El.classList.add('active');
 
-        // Выбираем попадание в прошлое на основе сферы и дня рождения
-        const resonanceList = PAST_RESONANCE_DATA[state.sphere] || PAST_RESONANCE_DATA.love;
-        const dayNum = state.birthDate ? parseInt(state.birthDate.split('-')[2] || '1', 10) : 1;
-        const pastText = resonanceList[dayNum % resonanceList.length];
-
-        const pastTextEl = document.getElementById('resonance-past-text');
         const pastUserBadge = document.getElementById('resonance-user-badge');
-        if (pastTextEl) pastTextEl.textContent = pastText;
-        if (pastUserBadge) pastUserBadge.textContent = `Калибровка поля для: ${state.userName} • Сфера: ${SPHERE_CONFIG[state.sphere].title}`;
+        if (pastUserBadge) {
+            const sphereTitle = SPHERE_CONFIG[state.sphere] ? SPHERE_CONFIG[state.sphere].title : 'Общая ситуация';
+            pastUserBadge.innerHTML = `<i class="fas fa-compass"></i> Сверка фокуса: ${escapeHtml(state.userName)} • Сфера: ${sphereTitle}`;
+        }
 
-        // Анимация калибровочного индикатора
-        const meterFill = document.getElementById('resonance-meter-fill');
-        const meterPercent = document.getElementById('resonance-meter-percent');
-        if (meterFill && meterPercent) {
-            meterFill.style.width = '0%';
-            let p = 0;
-            const interval = setInterval(() => {
-                p += 4;
-                if (p <= 97) {
-                    meterFill.style.width = p + '%';
-                    meterPercent.textContent = p + '%';
-                } else {
-                    clearInterval(interval);
-                    meterFill.style.width = '97%';
-                    meterPercent.textContent = '97% (Синхронизация установлена)';
-                }
-            }, 30);
+        const statusText = document.getElementById('resonance-status-text');
+        if (statusText) {
+            statusText.textContent = 'Настройка фокуса...';
+            setTimeout(() => {
+                statusText.textContent = 'Поле откалибровано';
+            }, 500);
         }
 
         step2El.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     function setupStep2() {
+        const optionBtns = document.querySelectorAll('.focus-option-btn');
+        const customWrap = document.getElementById('focus-custom-wrap');
+        const customInput = document.getElementById('focus-custom-input');
         const confirmPastBtn = document.getElementById('confirm-past-resonance-btn');
+
+        optionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                optionBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const focusVal = btn.dataset.focus;
+                if (focusVal === 'custom') {
+                    if (customWrap) customWrap.style.display = 'block';
+                    if (customInput) {
+                        customInput.focus();
+                        state.userFocus = customInput.value.trim() || 'Индивидуальный контекст ситуации';
+                    }
+                } else {
+                    if (customWrap) customWrap.style.display = 'none';
+                    state.userFocus = focusVal;
+                }
+            });
+        });
+
+        if (customInput) {
+            customInput.addEventListener('input', (e) => {
+                state.userFocus = e.target.value.trim() || 'Индивидуальный контекст ситуации';
+            });
+        }
+
         if (confirmPastBtn) {
             confirmPastBtn.addEventListener('click', () => {
+                const activeBtn = document.querySelector('.focus-option-btn.active');
+                if (activeBtn && activeBtn.dataset.focus === 'custom' && customInput) {
+                    state.userFocus = customInput.value.trim() || 'Индивидуальный контекст ситуации';
+                }
                 goToStep3(); // Переход к Уточняющим вопросам (анамнезу)
             });
         }
@@ -588,7 +552,7 @@
         const c2 = state.chosenCards[1];
         const c3 = state.chosenCards[2];
 
-        const initialGreeting = `Здравствуйте, ${state.userName}! Я внимательно изучила вашу ситуацию в сфере «${SPHERE_CONFIG[state.sphere].title}». Вы отметили, что ситуация длится ${state.duration.toLowerCase()} и вас беспокоит страх «${state.mainFear.toLowerCase()}». Выпавшая триада (${c1.name} — ${c2.name} — ${c3.name}) прямо подтверждает эту динамику. Вы можете задать мне любой уточняющий вопрос по вашему раскладу прямо здесь — напишите его в поле ниже, и я дам подробный ответ.`;
+        const initialGreeting = `Здравствуйте, ${state.userName}! Я внимательно изучила вашу ситуацию в сфере «${SPHERE_CONFIG[state.sphere].title}». В качестве ключевого фокуса вы отметили: «${state.userFocus}». Ситуация продолжается ${state.duration.toLowerCase()}, и главный волнующий фактор — «${state.mainFear.toLowerCase()}». Выпавшая триада (${c1.name} — ${c2.name} — ${c3.name}) прямо раскрывает эту динамику. Вы можете задать мне любой уточняющий вопрос по вашему раскладу прямо здесь — напишите его в поле ниже, и я дам подробный разбор.`;
 
         showMasterMessage(initialGreeting);
 
