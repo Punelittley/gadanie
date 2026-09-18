@@ -236,15 +236,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Переход на страницу готового расклада после оплаты
+    // Переход на страницу реальной оплаты Lava.top
     const openDemoReadingBtn = document.getElementById('open-demo-reading-btn');
     if (openDemoReadingBtn) {
         openDemoReadingBtn.addEventListener('click', () => {
-            const service = document.getElementById('order-service-select') ? document.getElementById('order-service-select').value : 'Анализ Отношений';
-            showToast('Оплата подтверждена. Открытие вашего расклада...');
-            setTimeout(() => {
-                window.location.href = `reading.html?tariff=${encodeURIComponent(service)}`;
-            }, 450);
+            showToast('Переход к безопасной оплате картой или СБП...');
         });
     }
 
