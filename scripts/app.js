@@ -300,4 +300,25 @@ document.addEventListener('DOMContentLoaded', () => {
             toast.classList.remove('show');
         }, 3200);
     };
+
+    // 8. Баннер согласия на обработку файлов cookie (152-ФЗ РФ)
+    const cookieBanner = document.getElementById('cookie-banner');
+    const cookieAcceptBtn = document.getElementById('cookie-accept-btn');
+    if (cookieBanner && cookieAcceptBtn) {
+        if (!localStorage.getItem('arcanum_cookie_accepted')) {
+            setTimeout(() => {
+                cookieBanner.style.display = 'block';
+            }, 800);
+        }
+        cookieAcceptBtn.addEventListener('click', () => {
+            localStorage.setItem('arcanum_cookie_accepted', 'true');
+            cookieBanner.style.opacity = '0';
+            cookieBanner.style.transform = 'translateY(20px)';
+            cookieBanner.style.transition = 'all 0.3s ease';
+            setTimeout(() => {
+                cookieBanner.style.display = 'none';
+            }, 300);
+        });
+    }
 });
+

@@ -2953,4 +2953,90 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* ==========================================================================
+   COOKIE CONSENT BANNER (152-ФЗ РФ)
+   ========================================================================== */
+.cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+    background: rgba(14, 7, 30, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 0 20px rgba(212, 175, 55, 0.15);
+    z-index: 998;
+    padding: 16px 22px;
+    animation: cookieSlideUp 0.4s ease-out;
+}
+
+.cookie-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cookie-banner-text {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    flex: 1;
+    min-width: 260px;
+}
+
+.cookie-banner-icon {
+    font-size: 1.3rem;
+    color: var(--gold-300);
+    flex-shrink: 0;
+}
+
+.cookie-banner-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.cookie-banner-actions .btn {
+    white-space: nowrap;
+}
+
+@keyframes cookieSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 640px) {
+    .cookie-banner {
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        padding: 14px 16px;
+    }
+    .cookie-banner-text {
+        font-size: 0.82rem;
+    }
+    .cookie-banner-actions {
+        width: 100%;
+    }
+    .cookie-banner-actions .btn {
+        width: 100%;
+    }
+}
+
+
 
