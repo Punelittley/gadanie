@@ -183,7 +183,7 @@
                 if (!nameVal || nameVal.length < 2) {
                     if (errorEl) {
                         errorEl.style.display = 'block';
-                        errorEl.textContent = 'Пожалуйста, укажите ваше имя — мастеру необходимо настроиться на ваш личный канал.';
+                        errorEl.textContent = 'Пожалуйста, укажите ваше имя — Оракулу необходимо настроиться на ваш сакральный канал.';
                     }
                     if (nameInput) {
                         nameInput.classList.add('input-field-error');
@@ -547,12 +547,12 @@
         chatMessagesContainer.innerHTML = '';
         state.chatMessages = [];
 
-        // Формируем первое глубокое персональное сообщение от мастера Александры
+        // Формируем первое глубокое персональное сообщение от Оракула АРКАНУМ
         const c1 = state.chosenCards[0];
         const c2 = state.chosenCards[1];
         const c3 = state.chosenCards[2];
 
-        const initialGreeting = `Здравствуйте, ${state.userName}! Я внимательно изучила вашу ситуацию в сфере «${SPHERE_CONFIG[state.sphere].title}». В качестве ключевого фокуса вы отметили: «${state.userFocus}». Ситуация продолжается ${state.duration.toLowerCase()}, и главный волнующий фактор — «${state.mainFear.toLowerCase()}». Выпавшая триада (${c1.name} — ${c2.name} — ${c3.name}) прямо раскрывает эту динамику. Вы можете задать мне любой уточняющий вопрос по вашему раскладу прямо здесь — напишите его в поле ниже, и я дам подробный разбор.`;
+        const initialGreeting = `Приветствую тебя, ${state.userName}. Сакральные Арканы приняли твой запрос в сфере «${SPHERE_CONFIG[state.sphere].title}». Точка твоего скрытого напряжения: «${state.userFocus}». Ситуация длится ${state.duration.toLowerCase()}, и главный тревожащий фактор — «${state.mainFear.toLowerCase()}». Выпавшая триада (${c1.name} — ${c2.name} — ${c3.name}) открыла невидимые силовые линии происходящего. Ты можешь задать Оракулу любой волнующий вопрос прямо здесь — напиши его в поле ниже, и символы откроют ответ.`;
 
         showMasterMessage(initialGreeting);
 
@@ -569,7 +569,7 @@
                 chatInput.value = '';
                 chatInput.focus();
 
-                // Показываем индикатор набора текста Александрой
+                // Показываем индикатор считывания Оракулом
                 showTypingIndicator();
 
                 // Ответ ИИ через 1.4 секунды
@@ -604,8 +604,8 @@
         msgEl.className = 'chat-bubble master-msg';
         msgEl.innerHTML = `
             <div class="msg-author-header">
-                <span class="author-avatar">А</span>
-                <span class="author-name">Александра • Мастер</span>
+                <span class="author-avatar" style="color: var(--gold-300);"><i class="fas fa-eye"></i></span>
+                <span class="author-name">Оракул АРКАНУМ</span>
             </div>
             <div class="msg-content">${text}</div>
             <span class="msg-time">${getCurrentTimeStr()}</span>
@@ -614,7 +614,7 @@
         container.scrollTop = container.scrollHeight;
 
         // Сохраняем в сессию
-        state.chatMessages.push({ role: 'master', text: text });
+        state.chatMessages.push({ role: 'oracle', text: text });
         try {
             sessionStorage.setItem('arcanum_chat_history', JSON.stringify(state.chatMessages));
         } catch (e) {}
@@ -631,7 +631,7 @@
             <span class="typing-dot"></span>
             <span class="typing-dot"></span>
             <span class="typing-dot"></span>
-            <span style="font-size: 0.8rem; color: var(--gold-300); margin-left: 6px;">Александра анализирует карты...</span>
+            <span style="font-size: 0.8rem; color: var(--gold-300); margin-left: 6px;">Оракул сопоставляет знаки Арканов...</span>
         `;
         container.appendChild(typingEl);
         container.scrollTop = container.scrollHeight;

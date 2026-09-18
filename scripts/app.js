@@ -220,19 +220,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Корректный деловой текст сообщения для Telegram мастера
-            const message = `ЗАЯВКА НА КОНСУЛЬТАЦИЮ ТАРО\n\nИмя: ${name}\nКонтакт для связи: ${contact}\nТариф: ${service}\nОписание вопроса: ${question || 'Уточнить при диалоге'}\n\nС условиями Публичной оферты и Политикой конфиденциальности (152-ФЗ) ознакомлен(а). Возраст: 18+.`;
+            // Текст сообщения для Telegram куратора Оракула
+            const message = `ЗАЯВКА НА СЕАНС ОРАКУЛА АРКАНУМ\n\nИмя: ${name}\nКонтакт для связи: ${contact}\nТариф: ${service}\nОписание вопроса: ${question || 'Уточнить при диалоге'}\n\nС условиями Публичной оферты и Политикой конфиденциальности (152-ФЗ) ознакомлен(а). Возраст: 18+.`;
 
             const telegramUsername = 'astral_tarot_master';
             const tgUrl = `https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`;
 
-            showToast('Перенаправление в Telegram мастера...');
+            showToast('Переход в Telegram...');
+            closeModal(modalOrder);
+            orderForm.reset();
 
-            setTimeout(() => {
-                window.open(tgUrl, '_blank');
-                closeModal(modalOrder);
-                orderForm.reset();
-            }, 500);
+            // Надежный переход без асинхронной задержки (предотвращает блокировку попапа в Safari iOS)
+            const opened = window.open(tgUrl, '_blank');
+            if (!opened) {
+                window.location.href = tgUrl;
+            }
         });
     }
 

@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>АРКАНУМ — Ваш персональный расклад Таро</title>
-    <meta name="description" content="Страница персонального расклада Таро и консультации мастера. Интерактивная колода, аналитический протокол и рекомендации.">
+    <title>АРКАНУМ — Персональный протокол Оракула Таро</title>
+    <meta name="description" content="Страница персонального протокола Оракула Таро. Символический разбор Арканов, синтез ситуации и аналитический протокол.">
+
+    <!-- Favicon (Сакральная золотая звезда Арканума) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230e071e' stroke='%23d4af37' stroke-width='4'/%3E%3Cpath d='M50 12 L59 38 L87 38 L64 54 L73 80 L50 64 L27 80 L36 54 L13 38 L41 38 Z' fill='%23f5d061'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%230e071e' stroke='%23d4af37' stroke-width='2'/%3E%3C/svg%3E">
 
     <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Стили сайта (с версионированием) -->
-    <link rel="stylesheet" href="styles/main.css?v=2.4">
+    <link rel="stylesheet" href="styles/main.css?v=2.5">
 
     <style>
         /* Специфические стили для страницы готового расклада */
@@ -519,7 +522,7 @@
                         Ваш персональный <span class="gold-text">расклад готов</span>
                     </h1>
                     <p id="reading-hero-desc" style="color: var(--text-secondary); font-size: 1rem;">
-                        Консультация подготовлена мастером Александрой. Нажмите на карты, чтобы открыть символику арканов и ознакомьтесь с подробным аналитическим протоколом ниже.
+                        Персональный протокол сгенерирован Оракулом АРКАНУМ. Нажмите на карты, чтобы открыть символику арканов и ознакомьтесь с подробным аналитическим протоколом ниже.
                     </p>
                 </div>
 
@@ -655,8 +658,8 @@
     <section class="container">
         <div class="protocol-action-card">
             <div class="protocol-info-group">
-                <h4><i class="fas fa-file-shield" style="color: var(--gold-400); margin-right: 8px;"></i> Официальный протокол консультации</h4>
-                <p>Письменный синтез триады Арканов с рекомендациями мастера. Вы можете распечатать или сохранить протокол в PDF.</p>
+                <h4><i class="fas fa-file-shield" style="color: var(--gold-400); margin-right: 8px;"></i> Официальный протокол Оракула</h4>
+                <p>Синтез триады Арканов с аналитическим вердиктом Оракула АРКАНУМ. Вы можете распечатать или сохранить протокол в PDF.</p>
             </div>
             <button class="btn btn-gold" onclick="window.print()" style="padding: 12px 28px; white-space: nowrap;">
                 <i class="fas fa-file-pdf"></i> Сохранить в PDF / Печать
@@ -708,24 +711,24 @@
         <!-- Итоговый совет мастера -->
         <div class="master-summary-box">
             <h4 class="summary-title">
-                <i class="fas fa-feather-pointed"></i> Резюме и практический совет мастера
+                <i class="fas fa-eye"></i> Вердикт и практический совет Оракула АРКАНУМ
             </h4>
             <p id="master-summary-text" style="color: var(--text-primary); font-size: 1.05rem; line-height: 1.75; margin-bottom: 16px;">
                 «Не форсируйте события силой: время борьбы за доминирование прошло. Позвольте честному диалогу восстановить равновесие. Главное предостережение арканов — не возвращаться к старым упрекам, а смотреть в общее светлое будущее с верой и открытым сердцем.»
             </p>
             <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px;">
                 <a href="https://t.me/astral_tarot_master" target="_blank" class="btn btn-gold btn-sm">
-                    <i class="fab fa-telegram-plane"></i> Задать бесплатный уточняющий вопрос
+                    <i class="fab fa-telegram-plane"></i> Задать вопрос куратору Оракула в Telegram
                 </a>
                 <button class="btn btn-glass btn-sm" onclick="window.print()">
                     <i class="fas fa-file-pdf"></i> Распечатать / Сохранить в PDF
                 </button>
         </div>
 
-        <!-- Блок истории диалога с мастером Александрой (если проводился в ритуале) -->
+        <!-- Блок истории диалога с Оракулом (если проводился в ритуале) -->
         <div id="reading-dialogue-block" style="display: none; margin-top: 36px; background: var(--bg-glass); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 28px;">
             <h4 style="font-family: var(--font-heading); color: var(--gold-200); font-size: 1.2rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-comments"></i> Протокол ответов мастера на ваши вопросы
+                <i class="fas fa-scroll"></i> Протокол ответов Оракула АРКАНУМ на ваши вопросы
             </h4>
             <div id="reading-dialogue-messages" style="display: flex; flex-direction: column; gap: 14px;"></div>
         </div>
@@ -890,7 +893,7 @@
                     if (profile.name) {
                         const heroDesc = document.getElementById('reading-hero-desc');
                         if (heroDesc) {
-                            heroDesc.innerHTML = `Консультация подготовлена мастером Александрой для <strong>${profile.name}</strong>. Сфера запроса: <strong>${profile.sphereTitle || 'Персональный разбор'}</strong>. Ознакомьтесь с подробным аналитическим протоколом выпавших Арканов ниже.`;
+                            heroDesc.innerHTML = `Персональный протокол сгенерирован Оракулом АРКАНУМ для <strong>${profile.name}</strong>. Сфера запроса: <strong>${profile.sphereTitle || 'Персональный разбор'}</strong>. Ознакомьтесь с подробным аналитическим толкованием выпавших Арканов ниже.`;
                         }
                     }
 
@@ -905,52 +908,31 @@
                         const anamnesisVal = document.getElementById('order-anamnesis-val');
                         if (anamnesisItem && anamnesisVal) {
                             anamnesisItem.style.display = 'flex';
-                            anamnesisVal.textContent = `Длительность: ${profile.duration || 'активная'} • Страх: ${profile.mainFear || 'неопределенность'}`;
+                            anamnesisVal.textContent = `${profile.duration || 'Не указано'} • Фокус: ${profile.userFocus || profile.mainFear || 'Общий анализ'}`;
                         }
                     }
 
-                    // 2. Выпавшие карты (3 штуки)
-                    if (Array.isArray(cards) && cards.length === 3) {
-                        cards.forEach((card, i) => {
-                            const idx = i + 1;
-                            // Лицевая сторона карты на алтаре
-                            const romanEl = document.getElementById(`card-${idx}-roman`);
-                            const nameEl = document.getElementById(`card-${idx}-name`);
-                            const kwEl = document.getElementById(`card-${idx}-keyword`);
-                            const iconEl = document.getElementById(`card-${idx}-icon`);
-
-                            if (romanEl) romanEl.textContent = card.roman;
-                            if (nameEl) nameEl.textContent = card.name;
-                            if (kwEl) kwEl.textContent = card.keywords ? card.keywords.slice(0, 3).join(' • ') : card.subtitle;
-                            if (iconEl) iconEl.className = getIconForCard(card.artType);
-
-                            // Текстовая интерпретация позиции
-                            const posTitle = document.getElementById(`pos-title-${idx}`);
-                            const posSub = document.getElementById(`pos-sub-${idx}`);
-                            const posText = document.getElementById(`pos-text-${idx}`);
-
-                            const posNames = ['Исток ситуации', 'Текущее положение', 'Вектор развития'];
-                            if (posTitle) posTitle.textContent = `${posNames[i]}: Аркан ${card.roman} «${card.name}»`;
-                            if (posSub) posSub.textContent = card.subtitle;
-                            if (posText) posText.innerHTML = `${card.meaning}<br><br><strong>Совет Аркана:</strong> ${card.advice}`;
-                        });
-
-                        // Резюме мастера
-                        const masterSummary = document.getElementById('master-summary-text');
-                        if (masterSummary) {
-                            masterSummary.innerHTML = `«${profile.name || 'Искатель'}, связка выпавших арканов (<strong>${cards[0].name}</strong> в истоке, <strong>${cards[1].name}</strong> в центре и <strong>${cards[2].name}</strong> в перспективе) показывает переломную точку. Ситуация требует перехода от борьбы к созиданию. ${cards[2].advice}»`;
+                    // 2. Карты и толкования
+                    cards.forEach((c, idx) => {
+                        const i = idx + 1;
+                        const titleEl = document.getElementById(`pos-title-${i}`);
+                        const textEl = document.getElementById(`pos-text-${i}`);
+                        if (titleEl && c.name) {
+                            titleEl.textContent = `${c.position || 'Позиция ' + i}: Аркан ${c.roman} «${c.name}»`;
                         }
-                    }
-                }
+                        if (textEl && c.meaning) {
+                            textEl.innerHTML = `${c.meaning} <strong>Ключевой совет:</strong> ${c.advice || 'Сохраняйте осознанность.'}`;
+                        }
+                    });
 
-                // 3. История диалога с мастером (если пользователь задавал вопросы)
-                const chatHistoryRaw = sessionStorage.getItem('arcanum_chat_history');
-                if (chatHistoryRaw) {
-                    const chatHistory = JSON.parse(chatHistoryRaw);
-                    if (Array.isArray(chatHistory) && chatHistory.length > 0) {
+                    // 3. История диалога с Оракулом (если пользователь задавал вопросы)
+                    const chatRaw = sessionStorage.getItem('arcanum_chat_history');
+                    if (chatRaw) {
+                        const chatHistory = JSON.parse(chatRaw);
                         const dialogueBlock = document.getElementById('reading-dialogue-block');
                         const dialogueMsgs = document.getElementById('reading-dialogue-messages');
-                        if (dialogueBlock && dialogueMsgs) {
+
+                        if (dialogueBlock && dialogueMsgs && chatHistory.length > 0) {
                             dialogueBlock.style.display = 'block';
                             dialogueMsgs.innerHTML = '';
                             chatHistory.forEach(item => {
@@ -960,11 +942,11 @@
                                 el.style.lineHeight = '1.6';
                                 el.style.fontSize = '0.92rem';
 
-                                if (item.role === 'master') {
+                                if (item.role === 'master' || item.role === 'oracle') {
                                     el.style.background = 'rgba(26, 14, 52, 0.85)';
                                     el.style.border = '1px solid rgba(229, 185, 92, 0.3)';
                                     el.style.color = 'var(--text-primary)';
-                                    el.innerHTML = `<strong><i class="fas fa-feather-pointed" style="color: var(--gold-300);"></i> Александра:</strong> ${item.text}`;
+                                    el.innerHTML = `<strong><i class="fas fa-eye" style="color: var(--gold-300);"></i> Оракул АРКАНУМ:</strong> ${item.text}`;
                                 } else {
                                     el.style.background = 'rgba(76, 29, 149, 0.6)';
                                     el.style.border = '1px solid rgba(216, 180, 254, 0.3)';
