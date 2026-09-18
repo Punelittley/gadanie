@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>АРКАНУМ — Ваш персональный расклад Таро</title>
-    <meta name="description" content="Страница персонального расклада Таро и консультации мастера. Интерактивная колода, аудиоразбор и рекомендации.">
+    <meta name="description" content="Страница персонального расклада Таро и консультации мастера. Интерактивная колода, аналитический протокол и рекомендации.">
 
     <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Стили сайта (с версионированием) -->
-    <link rel="stylesheet" href="styles/main.css?v=2.2">
+    <link rel="stylesheet" href="styles/main.css?v=2.4">
 
     <style>
         /* Специфические стили для страницы готового расклада */
@@ -211,83 +211,121 @@
             font-weight: 500;
         }
 
-        /* Аудио-плеер мастера */
-        .audio-player-card {
-            background: var(--bg-glass);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 36px 40px;
-            margin: 40px auto 60px;
-            max-width: 900px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        /* Защита страницы и экран блокировки (Paywall) */
+        .blurred-content {
+            filter: blur(16px) grayscale(30%);
+            pointer-events: none !important;
+            user-select: none !important;
+            max-height: 85vh;
+            overflow: hidden;
         }
-        .audio-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .audio-title-group h4 {
-            font-family: var(--font-heading);
-            font-size: 1.3rem;
-            color: var(--gold-100);
-            margin-bottom: 4px;
-        }
-        .audio-title-group p {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-        }
-        .audio-controls-row {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .play-btn {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--gold-300) 0%, var(--gold-500) 100%);
-            color: #120924;
-            border: none;
-            font-size: 1.3rem;
-            cursor: pointer;
+
+        .reading-paywall-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 30%, rgba(26, 12, 48, 0.95) 0%, rgba(8, 4, 18, 0.98) 100%);
+            z-index: 999999;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 20px var(--gold-glow);
-            transition: var(--transition-smooth);
-            flex-shrink: 0;
+            padding: 20px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
         }
-        .play-btn:hover {
-            transform: scale(1.06);
-            box-shadow: 0 8px 25px rgba(229, 185, 92, 0.5);
+
+        .reading-paywall-card {
+            background: rgba(18, 9, 36, 0.96);
+            border: 1.5px solid var(--gold-500);
+            border-radius: var(--radius-lg);
+            padding: 42px 36px;
+            max-width: 520px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), 0 0 50px rgba(229, 185, 92, 0.2);
+            animation: fadeInPaywall 0.4s ease-out;
         }
-        .waveform-track {
-            flex-grow: 1;
-            height: 40px;
+
+        @keyframes fadeInPaywall {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .paywall-lock-badge {
+            width: 78px;
+            height: 78px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: rgba(229, 185, 92, 0.12);
+            border: 2px solid var(--gold-400);
             display: flex;
             align-items: center;
-            gap: 4px;
-            cursor: pointer;
-            padding: 0 8px;
-        }
-        .wave-bar {
-            flex: 1;
-            background: rgba(229, 185, 92, 0.25);
-            border-radius: 2px;
-            transition: background 0.2s ease, height 0.2s ease;
-        }
-        .wave-bar.active {
-            background: var(--gold-500);
-        }
-        .audio-time {
-            font-family: monospace;
-            font-size: 0.95rem;
+            justify-content: center;
+            font-size: 2.1rem;
             color: var(--gold-300);
-            min-width: 90px;
-            text-align: right;
+            box-shadow: 0 0 30px rgba(229, 185, 92, 0.35);
+        }
+
+        .paywall-title {
+            font-family: var(--font-heading);
+            color: var(--gold-100);
+            font-size: 1.55rem;
+            margin-bottom: 8px;
+        }
+
+        .paywall-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.65;
+            margin-bottom: 24px;
+        }
+
+        /* Официальный протокол (вместо аудио) */
+        .protocol-action-card {
+            background: var(--bg-glass);
+            border: 1.5px solid var(--border-gold);
+            border-radius: var(--radius-md);
+            padding: 24px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin: 30px auto 50px;
+            max-width: 900px;
+        }
+
+        .protocol-info-group h4 {
+            color: var(--gold-100);
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+            font-family: var(--font-heading);
+        }
+
+        .protocol-info-group p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        @media print {
+            .header, .top-legal-bar, .protocol-action-card, .footer, .reading-paywall-overlay, .reading-dialogue-section, .btn {
+                display: none !important;
+            }
+            body {
+                background: #fff !important;
+                color: #111 !important;
+            }
+            .order-meta-card, .position-card, .synthesis-card, .card-face-front {
+                border: 1px solid #ddd !important;
+                color: #111 !important;
+                background: #fff !important;
+                box-shadow: none !important;
+            }
         }
 
         /* Текстовая расшифровка позиций */
@@ -379,8 +417,8 @@
             .flip-card-container {
                 max-width: 280px;
             }
-            .audio-player-card {
-                padding: 24px 20px;
+            .protocol-action-card {
+                padding: 20px;
             }
             .interpretations-section {
                 padding: 0 16px;
@@ -427,20 +465,63 @@
         </div>
     </header>
 
-    <!-- Верхний блок с реквизитами заказа -->
-    <section class="reading-hero">
-        <div class="container">
-            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
-                <span class="status-badge-paid">
-                    <i class="fas fa-circle-check"></i> Заказ оплачен • Чек сформирован в системе «Мой Налог»
-                </span>
-                <h1 class="hero-title" style="font-size: 2.5rem; margin-top: 16px; margin-bottom: 10px;">
-                    Ваш персональный <span class="gold-text">расклад готов</span>
-                </h1>
-                <p id="reading-hero-desc" style="color: var(--text-secondary); font-size: 1rem;">
-                    Консультация подготовлена мастером Александрой. Нажмите на карты, чтобы открыть символику арканов и ознакомьтесь с аудио- и текстовым анализом ниже.
-                </p>
+    <!-- Экран блокировки (Paywall) при отсутствии оплаты -->
+    <div class="reading-paywall-overlay" id="reading-paywall-modal" style="display: none;">
+        <div class="reading-paywall-card">
+            <div class="paywall-lock-badge">
+                <i class="fas fa-lock"></i>
             </div>
+            <h2 class="paywall-title">Доступ к протоколу закрыт</h2>
+            <div class="ornament-divider">✦ ❖ ✦</div>
+            <p class="paywall-desc">
+                Полный персональный расклад, синтез Старших Арканов и аналитический протокол мастера доступны только после подтверждения оплаты заказа.
+            </p>
+            <div class="paywall-action-box">
+                <a href="https://app.lava.top/products/bafc66ae-c253-4e07-8842-836eb972477b" target="_blank" rel="noopener" class="btn btn-gold btn-lg" style="width: 100%; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; padding: 14px 20px; font-size: 1.05rem;">
+                    <i class="fas fa-credit-card"></i> ✦ Оплатить расклад (1 490 ₽) ✦
+                </a>
+                
+                <div style="margin-top: 14px;">
+                    <button type="button" id="toggle-code-btn" style="background: none; border: none; color: var(--gold-300); cursor: pointer; font-size: 0.9rem; text-decoration: underline;">
+                        Уже оплатили? Ввести код доступа
+                    </button>
+                </div>
+
+                <div id="paywall-code-wrap" style="display: none; margin-top: 14px;">
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="manual-access-input" class="form-input" placeholder="Код доступа (например: arcanum_7f9b2)" style="text-align: center;">
+                        <button type="button" class="btn btn-gold" id="apply-code-btn" style="padding: 0 20px;">ОК</button>
+                    </div>
+                    <div id="paywall-code-error" style="color: #f87171; font-size: 0.82rem; margin-top: 6px; display: none;">
+                        Неверный код доступа. Проверьте квитанцию Lava.top.
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+                <a href="index.html" class="nav-link" style="font-size: 0.88rem; color: var(--text-muted);">
+                    <i class="fas fa-arrow-left"></i> Вернуться на главную страницу к колоде
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Защищенное содержимое расклада -->
+    <div id="reading-content-wrap">
+        <!-- Верхний блок с реквизитами заказа -->
+        <section class="reading-hero">
+            <div class="container">
+                <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+                    <span class="status-badge-paid">
+                        <i class="fas fa-circle-check"></i> Заказ оплачен • Чек сформирован в системе «Мой Налог»
+                    </span>
+                    <h1 class="hero-title" style="font-size: 2.5rem; margin-top: 16px; margin-bottom: 10px;">
+                        Ваш персональный <span class="gold-text">расклад готов</span>
+                    </h1>
+                    <p id="reading-hero-desc" style="color: var(--text-secondary); font-size: 1rem;">
+                        Консультация подготовлена мастером Александрой. Нажмите на карты, чтобы открыть символику арканов и ознакомьтесь с подробным аналитическим протоколом ниже.
+                    </p>
+                </div>
 
             <div class="order-meta-card">
                 <div class="meta-info-item">
@@ -570,50 +651,16 @@
         </div>
     </section>
 
-    <!-- Аудиоразбор от мастера -->
+    <!-- Официальный протокол и кнопка сохранения в PDF -->
     <section class="container">
-        <div class="audio-player-card">
-            <div class="audio-header">
-                <div class="audio-title-group">
-                    <h4><i class="fas fa-volume-high" style="color: var(--gold-500); margin-right: 8px;"></i> Аудиоразбор мастера Александры</h4>
-                    <p>Подробный разбор расклада, интонаций и скрытых смыслов (14 мин 38 сек)</p>
-                </div>
-                <button class="btn btn-glass btn-sm" onclick="downloadAudio()">
-                    <i class="fas fa-download"></i> Скачать аудио
-                </button>
+        <div class="protocol-action-card">
+            <div class="protocol-info-group">
+                <h4><i class="fas fa-file-shield" style="color: var(--gold-400); margin-right: 8px;"></i> Официальный протокол консультации</h4>
+                <p>Письменный синтез триады Арканов с рекомендациями мастера. Вы можете распечатать или сохранить протокол в PDF.</p>
             </div>
-
-            <div class="audio-controls-row">
-                <button class="play-btn" id="play-pause-btn" onclick="toggleAudioPlay()">
-                    <i class="fas fa-play" id="play-icon"></i>
-                </button>
-
-                <div class="waveform-track" id="waveform-container" onclick="seekWave(event)">
-                    <!-- Интерактивная аудио-волна -->
-                    <div class="wave-bar active" style="height: 12px;"></div>
-                    <div class="wave-bar active" style="height: 24px;"></div>
-                    <div class="wave-bar active" style="height: 32px;"></div>
-                    <div class="wave-bar active" style="height: 18px;"></div>
-                    <div class="wave-bar active" style="height: 28px;"></div>
-                    <div class="wave-bar active" style="height: 38px;"></div>
-                    <div class="wave-bar active" style="height: 22px;"></div>
-                    <div class="wave-bar active" style="height: 16px;"></div>
-                    <div class="wave-bar active" style="height: 34px;"></div>
-                    <div class="wave-bar active" style="height: 28px;"></div>
-                    <div class="wave-bar active" style="height: 14px;"></div>
-                    <div class="wave-bar" style="height: 26px;"></div>
-                    <div class="wave-bar" style="height: 36px;"></div>
-                    <div class="wave-bar" style="height: 18px;"></div>
-                    <div class="wave-bar" style="height: 30px;"></div>
-                    <div class="wave-bar" style="height: 22px;"></div>
-                    <div class="wave-bar" style="height: 14px;"></div>
-                    <div class="wave-bar" style="height: 32px;"></div>
-                    <div class="wave-bar" style="height: 24px;"></div>
-                    <div class="wave-bar" style="height: 18px;"></div>
-                </div>
-
-                <div class="audio-time" id="audio-timer">03:42 / 14:38</div>
-            </div>
+            <button class="btn btn-gold" onclick="window.print()" style="padding: 12px 28px; white-space: nowrap;">
+                <i class="fas fa-file-pdf"></i> Сохранить в PDF / Печать
+            </button>
         </div>
     </section>
 
@@ -708,79 +755,86 @@
             </p>
         </div>
     </footer>
+    </div> <!-- /#reading-content-wrap -->
 
     <script>
+        // СИСТЕМА КОНТРОЛЯ ДОСТУПА К ОПЛАЧЕННОМУ ПРОТОКОЛУ (PAYWALL)
+        (function initPaywall() {
+            const VALID_KEYS = ['arcanum_7f9b2', 'arcanum_pass_2026', 'paid_access', 'ARCANUM2026'];
+            const urlParams = new URLSearchParams(window.location.search);
+            const passedKey = (urlParams.get('access') || urlParams.get('key') || '').trim();
+            const isDemo = urlParams.get('demo') === 'sample' || urlParams.get('from') === 'sample';
+            const storedAccess = localStorage.getItem('arcanum_paid_access');
+
+            const contentWrap = document.getElementById('reading-content-wrap');
+            const paywallEl = document.getElementById('reading-paywall-modal');
+            const toggleCodeBtn = document.getElementById('toggle-code-btn');
+            const codeWrap = document.getElementById('paywall-code-wrap');
+            const codeInput = document.getElementById('manual-access-input');
+            const applyCodeBtn = document.getElementById('apply-code-btn');
+            const codeError = document.getElementById('paywall-code-error');
+
+            function unlockReading() {
+                if (contentWrap) contentWrap.classList.remove('blurred-content');
+                if (paywallEl) {
+                    paywallEl.style.opacity = '0';
+                    paywallEl.style.transition = 'opacity 0.4s ease';
+                    setTimeout(() => { paywallEl.style.display = 'none'; }, 400);
+                }
+            }
+
+            function lockReading() {
+                if (contentWrap) contentWrap.classList.add('blurred-content');
+                if (paywallEl) paywallEl.style.display = 'flex';
+            }
+
+            // Если передан валидный ключ в URL или доступ уже был активирован ранее
+            if (storedAccess === 'granted' || VALID_KEYS.includes(passedKey)) {
+                if (VALID_KEYS.includes(passedKey)) {
+                    localStorage.setItem('arcanum_paid_access', 'granted');
+                }
+                unlockReading();
+            } else {
+                lockReading();
+            }
+
+            // Обработка ручного ввода кода
+            if (toggleCodeBtn && codeWrap) {
+                toggleCodeBtn.addEventListener('click', () => {
+                    const isHidden = codeWrap.style.display === 'none';
+                    codeWrap.style.display = isHidden ? 'block' : 'none';
+                    if (isHidden && codeInput) codeInput.focus();
+                });
+            }
+
+            if (applyCodeBtn && codeInput) {
+                applyCodeBtn.addEventListener('click', () => {
+                    const code = codeInput.value.trim();
+                    if (VALID_KEYS.includes(code)) {
+                        localStorage.setItem('arcanum_paid_access', 'granted');
+                        if (codeError) codeError.style.display = 'none';
+                        unlockReading();
+                    } else {
+                        if (codeError) codeError.style.display = 'block';
+                        codeInput.classList.add('input-field-error');
+                    }
+                });
+
+                codeInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        applyCodeBtn.click();
+                    }
+                });
+            }
+        })();
+
         // Интерактивное переворачивание карт
         function toggleCard(num) {
             const el = document.getElementById('card-slot-' + num);
             if (el) {
                 el.classList.toggle('is-flipped');
             }
-        }
-
-        // Интерактивный аудио-плеер (симуляция воспроизведения)
-        let isPlaying = false;
-        let playInterval = null;
-        let currentSeconds = 222; // 03:42
-        const totalSeconds = 878; // 14:38
-
-        function formatTime(s) {
-            const m = Math.floor(s / 60);
-            const sec = s % 60;
-            return `${m < 10 ? '0' : ''}${m}:${sec < 10 ? '0' : ''}${sec}`;
-        }
-
-        function toggleAudioPlay() {
-            isPlaying = !isPlaying;
-            const icon = document.getElementById('play-icon');
-            const timer = document.getElementById('audio-timer');
-            const bars = document.querySelectorAll('.wave-bar');
-
-            if (isPlaying) {
-                icon.className = 'fas fa-pause';
-                playInterval = setInterval(() => {
-                    if (currentSeconds < totalSeconds) {
-                        currentSeconds++;
-                        timer.textContent = `${formatTime(currentSeconds)} / ${formatTime(totalSeconds)}`;
-                        
-                        // Анимация волны
-                        const activeCount = Math.floor((currentSeconds / totalSeconds) * bars.length);
-                        bars.forEach((bar, idx) => {
-                            if (idx <= activeCount) {
-                                bar.classList.add('active');
-                            } else {
-                                bar.classList.remove('active');
-                            }
-                        });
-                    } else {
-                        clearInterval(playInterval);
-                        isPlaying = false;
-                        icon.className = 'fas fa-play';
-                    }
-                }, 1000);
-            } else {
-                icon.className = 'fas fa-play';
-                clearInterval(playInterval);
-            }
-        }
-
-        function seekWave(e) {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const pct = Math.max(0, Math.min(1, clickX / rect.width));
-            currentSeconds = Math.floor(pct * totalSeconds);
-            document.getElementById('audio-timer').textContent = `${formatTime(currentSeconds)} / ${formatTime(totalSeconds)}`;
-
-            const bars = document.querySelectorAll('.wave-bar');
-            const activeCount = Math.floor(pct * bars.length);
-            bars.forEach((bar, idx) => {
-                if (idx <= activeCount) bar.classList.add('active');
-                else bar.classList.remove('active');
-            });
-        }
-
-        function downloadAudio() {
-            alert('Аудиофайл разбора в формате MP3 сохранен на ваше устройство.');
         }
 
         // Иконки для арканов
@@ -831,7 +885,7 @@
                     if (profile.name) {
                         const heroDesc = document.getElementById('reading-hero-desc');
                         if (heroDesc) {
-                            heroDesc.innerHTML = `Консультация подготовлена мастером Александрой для <strong>${profile.name}</strong>. Сфера запроса: <strong>${profile.sphereTitle || 'Персональный разбор'}</strong>. Ознакомьтесь с аудио- и текстовым анализом выпавших Арканов ниже.`;
+                            heroDesc.innerHTML = `Консультация подготовлена мастером Александрой для <strong>${profile.name}</strong>. Сфера запроса: <strong>${profile.sphereTitle || 'Персональный разбор'}</strong>. Ознакомьтесь с подробным аналитическим протоколом выпавших Арканов ниже.`;
                         }
                     }
 
