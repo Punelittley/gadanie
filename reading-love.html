@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АРКАНУМ — Анализ Отношений и Союза (Персональный протокол)</title>
+    <meta name="description" content="Глубокий символический протокол Оракула Таро: истинные чувства партнера, скрытые мотивы, точки напряжения и прогноз союза на 3–6 месяцев.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230e071e' stroke='%23d4af37' stroke-width='4'/%3E%3Cpath d='M50 12 L59 38 L87 38 L64 54 L73 80 L50 64 L27 80 L36 54 L13 38 L41 38 Z' fill='%23f5d061'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%230e071e' stroke='%23d4af37' stroke-width='2'/%3E%3C/svg%3E">
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Иконки FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Стили -->
+    <link rel="stylesheet" href="styles/main.css?v=2.5">
+    <link rel="stylesheet" href="styles/reading.css?v=2.5">
+</head>
+<body>
+
+    <!-- Верхний бар -->
+    <div class="top-legal-bar">
+        <div class="container top-legal-inner">
+            <div class="moon-widget">
+                <i class="fas fa-heart"></i> <span>АРКАНУМ ТАРО • Протокол «Анализ Отношений и Союза»</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 16px;">
+                <span>Услуга оказана полностью (ст. 438 ГК РФ)</span>
+                <span class="legal-badge-18">18+</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Шапка -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M12 3v18"></path>
+                    <path d="M3 12h18"></path>
+                    <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
+                </svg>
+                <div class="logo-text">АРКАНУМ<span>ТАРО</span></div>
+            </a>
+
+            <div class="header-actions">
+                <a href="index.html" class="btn btn-glass btn-sm">
+                    <i class="fas fa-arrow-left"></i> На главную
+                </a>
+                <button class="btn btn-gold btn-sm" onclick="window.print()">
+                    <i class="fas fa-print"></i> Сохранить PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Paywall -->
+    <div class="reading-paywall-overlay" id="reading-paywall-modal" style="display: none;">
+        <div class="reading-paywall-card">
+            <div class="paywall-lock-badge">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h2 class="paywall-title">Доступ к раскладу закрыт</h2>
+            <div class="ornament-divider">✦ ❖ ✦</div>
+            <p class="paywall-desc">
+                Глубокий анализ отношений, истинные чувства партнера и вектор союза на 3–6 месяцев открываются сразу после подтверждения оплаты заказа в системе Lava.top.
+            </p>
+            <div class="paywall-action-box">
+                <a href="https://app.lava.top/products/bafc66ae-c253-4e07-8842-836eb972477b" target="_blank" rel="noopener" class="btn btn-gold btn-lg" style="width: 100%; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; padding: 14px 20px; font-size: 1.05rem;">
+                    <i class="fas fa-credit-card"></i> ✦ Оплатить тариф (2 900 ₽) ✦
+                </a>
+                
+                <div style="margin-top: 14px;">
+                    <button type="button" id="toggle-code-btn" style="background: none; border: none; color: var(--gold-300); cursor: pointer; font-size: 0.9rem; text-decoration: underline;">
+                        Уже оплатили? Ввести ключ доступа
+                    </button>
+                </div>
+
+                <div id="paywall-code-wrap" style="display: none; margin-top: 14px;">
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="manual-access-input" class="form-input" placeholder="Ключ доступа (arcanum_pass_2026)" style="text-align: center;">
+                        <button type="button" class="btn btn-gold" id="apply-code-btn" style="padding: 0 20px;">ОК</button>
+                    </div>
+                    <div id="paywall-code-error" style="color: #f87171; font-size: 0.82rem; margin-top: 6px; display: none;">
+                        Неверный ключ доступа. Проверьте квитанцию Lava.top.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Защищенное содержимое -->
+    <div id="reading-content-wrap">
+        <section class="reading-hero">
+            <div class="container">
+                <div style="text-align: center; max-width: 740px; margin: 0 auto;">
+                    <span class="status-badge-paid">
+                        <i class="fas fa-circle-check"></i> Заказ оплачен • Чек сформирован ФНС (422-ФЗ)
+                    </span>
+                    <h1 class="hero-title" style="font-size: 2.5rem; margin-top: 16px; margin-bottom: 10px;">
+                        Зеркало Чувств: <span class="gold-text">Анализ Отношений и Союза</span>
+                    </h1>
+                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6;">
+                        Глубокое исследование динамики вашей пары. Триада Арканов раскрывает истинные подсознательные мотивы партнера, точку скрытого напряжения и прогноз развития союза на 3–6 месяцев.
+                    </p>
+                </div>
+
+                <div class="order-meta-card">
+                    <div class="meta-info-item">
+                        <span class="meta-info-label">Номер заказа</span>
+                        <span class="meta-info-val">№ RS-8291</span>
+                    </div>
+                    <div class="meta-info-item">
+                        <span class="meta-info-label">Тариф консультации</span>
+                        <span class="meta-info-val" style="color: var(--gold-300);">Анализ Отношений и Союза (2 900 ₽)</span>
+                    </div>
+                    <div class="meta-info-item">
+                        <span class="meta-info-label">Горизонт прогноза</span>
+                        <span class="meta-info-val">3–6 месяцев</span>
+                    </div>
+                    <div class="meta-info-item">
+                        <span class="meta-info-label">Статус</span>
+                        <span class="meta-info-val" style="color: #34d399;">Оказана полностью</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Алтарь 3 карт -->
+        <section class="spread-board-section">
+            <div class="container">
+                <div class="spread-instruction">
+                    <div class="section-badge">Сакральная триада</div>
+                    <h2 class="section-title">Карты вашего <span class="gold-text">союза</span></h2>
+                    <div class="ornament-divider">✦ ❖ ✦</div>
+                    <p class="section-subtitle">
+                        Коснитесь любой карты, чтобы перевернуть ее и рассмотреть архетипическую символику
+                    </p>
+                </div>
+
+                <div class="spread-cards-grid">
+                    <!-- Карта 1 -->
+                    <div class="spread-slot">
+                        <span class="slot-title-badge">Позиция I: Мысли и чувства партнера</span>
+                        <div class="flip-card-container is-flipped" onclick="this.classList.toggle('is-flipped')">
+                            <div class="flip-card-inner">
+                                <div class="card-face card-face-back">
+                                    <div class="card-back-pattern"><i class="fas fa-heart"></i></div>
+                                    <span class="tap-prompt">Коснитесь для переворота</span>
+                                    <span style="font-size: 0.75rem; color: var(--gold-500);">АРКАНУМ ТАРО</span>
+                                </div>
+                                <div class="card-face card-face-front">
+                                    <span class="front-roman">VI</span>
+                                    <div class="front-art-box"><i class="fas fa-heart"></i></div>
+                                    <div>
+                                        <div class="front-name">Влюбленные</div>
+                                        <div class="front-keyword">Привязанность • Сомнения • Выбор</div>
+                                    </div>
+                                    <span style="font-size: 0.75rem; color: var(--gold-300);">Карта открыта</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Карта 2 -->
+                    <div class="spread-slot">
+                        <span class="slot-title-badge">Позиция II: Скрытое напряжение</span>
+                        <div class="flip-card-container is-flipped" onclick="this.classList.toggle('is-flipped')">
+                            <div class="flip-card-inner">
+                                <div class="card-face card-face-back">
+                                    <div class="card-back-pattern"><i class="fas fa-moon"></i></div>
+                                    <span class="tap-prompt">Коснитесь для переворота</span>
+                                    <span style="font-size: 0.75rem; color: var(--gold-500);">АРКАНУМ ТАРО</span>
+                                </div>
+                                <div class="card-face card-face-front">
+                                    <span class="front-roman">XVIII</span>
+                                    <div class="front-art-box"><i class="fas fa-moon"></i></div>
+                                    <div>
+                                        <div class="front-name">Луна</div>
+                                        <div class="front-keyword">Страх уязвимости • Недосказанность</div>
+                                    </div>
+                                    <span style="font-size: 0.75rem; color: var(--gold-300);">Карта открыта</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Карта 3 -->
+                    <div class="spread-slot">
+                        <span class="slot-title-badge">Позиция III: Вектор развития на 3-6 мес.</span>
+                        <div class="flip-card-container is-flipped" onclick="this.classList.toggle('is-flipped')">
+                            <div class="flip-card-inner">
+                                <div class="card-face card-face-back">
+                                    <div class="card-back-pattern"><i class="fas fa-earth-americas"></i></div>
+                                    <span class="tap-prompt">Коснитесь для переворота</span>
+                                    <span style="font-size: 0.75rem; color: var(--gold-500);">АРКАНУМ ТАРО</span>
+                                </div>
+                                <div class="card-face card-face-front">
+                                    <span class="front-roman">XXI</span>
+                                    <div class="front-art-box"><i class="fas fa-earth-americas"></i></div>
+                                    <div>
+                                        <div class="front-name">Мир</div>
+                                        <div class="front-keyword">Гармония • Целостность • Исход</div>
+                                    </div>
+                                    <span style="font-size: 0.75rem; color: var(--gold-300);">Карта открыта</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Аналитический протокол -->
+        <section class="interpretations-section">
+            <div class="container">
+                <div class="protocol-cards-stack">
+                    <div class="position-card">
+                        <div class="position-card-header">
+                            <div class="position-num-badge">1</div>
+                            <h3 class="position-title">Позиция I: Аркан VI «Влюбленные» — Мысли, чувства и намерения партнера</h3>
+                        </div>
+                        <div class="position-text">
+                            В мыслях партнера существует глубокая эмоциональная привязанность и искренний интерес к вам. Однако Аркан «Влюбленные» — это всегда архетип выбора и внутренней развилки. Человек находится в состоянии взвешивания: он сравнивает текущую реальность отношений с собственными ожиданиями или прошлым опытом. Его чувства живы, но он боится сделать однозначный, бесповоротный шаг вперед, опасаясь потерять автономию.
+                        </div>
+                        <div class="position-advice-box">
+                            <strong><i class="fas fa-compass"></i> Скрытый мотив:</strong> Партнер не закрыт, но ждет от вас не требований определенности, а подтверждения взаимного уважения и безопасности.
+                        </div>
+                    </div>
+
+                    <div class="position-card">
+                        <div class="position-card-header">
+                            <div class="position-num-badge">2</div>
+                            <h3 class="position-title">Позиция II: Аркан XVIII «Луна» — Точка текущего скрытого напряжения</h3>
+                        </div>
+                        <div class="position-text">
+                            Аркан «Луна» вскрывает главную трещину союза — взаимные проекции и додумывание за другого. Между вами скопился пласт невысказанных тревог. Вместо того чтобы прямо спросить о волнующем вопросе, обе стороны пытаются интерпретировать интонации, паузы в ответах или смену настроения. Этот туман порождает иллюзию отчуждения там, где на самом деле есть обычная усталость и страх быть непонятым.
+                        </div>
+                        <div class="position-advice-box">
+                            <strong><i class="fas fa-triangle-exclamation"></i> Зона риска:</strong> Категорически противопоказаны манипуляции молчанием или проверки на ревность — это только сгустит лунный туман.
+                        </div>
+                    </div>
+
+                    <div class="position-card">
+                        <div class="position-card-header">
+                            <div class="position-num-badge">3</div>
+                            <h3 class="position-title">Позиция III: Аркан XXI «Мир» — Вектор развития на 3–6 месяцев и совет</h3>
+                        </div>
+                        <div class="position-text">
+                            Выход на высший Аркан «Мир» — превосходный знак. Он указывает на завершение мучительного переходного периода и переход союза на качественно новый, зрелый уровень. Кризис сомнений будет преодолен в ближайшие 8–12 недель. Отношения обретут прочный фундамент, если вы оба сбросите маски защитной гордости.
+                        </div>
+                        <div class="position-advice-box">
+                            <strong><i class="fas fa-gem"></i> Практический совет:</strong> Предложите партнеру спокойный разговор без взаимных обвинений. Сформулируйте не то, что вас раздражает, а то, в чем вы искренне нуждаетесь.
+                        </div>
+                    </div>
+
+                    <!-- Резюме Оракула -->
+                    <div class="master-summary-box">
+                        <div class="summary-title">
+                            <i class="fas fa-feather-pointed"></i> <span>Синтез отношений от Оракула АРКАНУМ</span>
+                        </div>
+                        <p style="color: rgba(240, 235, 248, 0.92); font-size: 1rem; line-height: 1.8; margin-bottom: 14px;">
+                            «Динамика вашей пары жива и обладает высоким созидательным потенциалом. Корень сомнений лежит не в отсутствии чувств, а в защитных барьерах от старых травм. Карта «Мир» обещает гармоничный союз, если вы позволите себе открыться навстречу партнеру первыми. Доверие — это ключ, который откроет замок вашей ситуации».
+                        </p>
+                    </div>
+
+                    <!-- Действия и связь -->
+                    <div class="protocol-action-card">
+                        <div>
+                            <h4 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--gold-100); margin-bottom: 6px;">
+                                1 уточняющий вопрос по раскладу включен в тариф
+                            </h4>
+                            <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">
+                                Направьте ваш вопрос по союзу в Telegram мастеру с указанием номера заказа № RS-8291.
+                            </p>
+                        </div>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                            <a href="https://t.me/astral_tarot_master?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%97%D0%B0%D0%BA%D0%B0%D0%B7%20%E2%84%96%20RS-8291%20(%D0%90%D0%BD%D0%B0%D0%BB%D0%B8%D0%B7%20%D0%9E%D1%82%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B9).%20%D0%9C%D0%BE%D0%B9%20%D1%83%D1%82%D0%BE%D1%87%D0%BD%D1%8F%D1%8E%D1%89%D0%B8%D0%B9%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%3A" target="_blank" rel="noopener" class="btn btn-gold btn-sm">
+                                <i class="fab fa-telegram"></i> Задать вопрос в Telegram
+                            </a>
+                            <button type="button" class="btn btn-glass btn-sm" onclick="window.print()">
+                                <i class="fas fa-file-pdf"></i> Экспорт протокола
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="legal-receipt-row">
+                        <div>
+                            <strong>Исполнитель:</strong> Макаров Николай В. (ИНН 562202292930, Самозанятый / НПД 422-ФЗ)
+                        </div>
+                        <div>
+                            <strong>Электронный чек:</strong> сформирован автоматически в системе «Мой Налог»
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer" style="border-top: 1px solid rgba(229, 185, 92, 0.15); padding: 30px 0;">
+            <div class="container" style="text-align: center;">
+                <p style="color: var(--text-muted); font-size: 0.84rem;">
+                    © 2026 АРКАНУМ ТАРО. Все права защищены. Маркировка 18+. Конфиденциальность гарантирована по 152-ФЗ РФ.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Скрипт доступа -->
+    <script>
+        (function initPaywall() {
+            const VALID_KEYS = ['arcanum_pass_2026', 'arcanum_7f9b2', 'paid_access', 'ARCANUM2026'];
+            const urlParams = new URLSearchParams(window.location.search);
+            const passedKey = (urlParams.get('key') || urlParams.get('access') || '').trim();
+            const storedAccess = localStorage.getItem('arcanum_paid_access');
+
+            const contentWrap = document.getElementById('reading-content-wrap');
+            const paywallEl = document.getElementById('reading-paywall-modal');
+            const toggleCodeBtn = document.getElementById('toggle-code-btn');
+            const codeWrap = document.getElementById('paywall-code-wrap');
+            const codeInput = document.getElementById('manual-access-input');
+            const applyCodeBtn = document.getElementById('apply-code-btn');
+            const codeError = document.getElementById('paywall-code-error');
+
+            function unlock() {
+                if (contentWrap) contentWrap.classList.remove('blurred-content');
+                if (paywallEl) paywallEl.style.display = 'none';
+            }
+
+            function lock() {
+                if (contentWrap) contentWrap.classList.add('blurred-content');
+                if (paywallEl) paywallEl.style.display = 'flex';
+            }
+
+            if (storedAccess === 'granted' || VALID_KEYS.includes(passedKey)) {
+                localStorage.setItem('arcanum_paid_access', 'granted');
+                unlock();
+            } else {
+                lock();
+            }
+
+            if (toggleCodeBtn && codeWrap) {
+                toggleCodeBtn.addEventListener('click', () => {
+                    const isHidden = codeWrap.style.display === 'none';
+                    codeWrap.style.display = isHidden ? 'block' : 'none';
+                    if (isHidden && codeInput) codeInput.focus();
+                });
+            }
+
+            if (applyCodeBtn && codeInput) {
+                applyCodeBtn.addEventListener('click', () => {
+                    const code = codeInput.value.trim();
+                    if (VALID_KEYS.includes(code)) {
+                        localStorage.setItem('arcanum_paid_access', 'granted');
+                        if (codeError) codeError.style.display = 'none';
+                        unlock();
+                    } else {
+                        if (codeError) codeError.style.display = 'block';
+                        codeInput.classList.add('input-field-error');
+                    }
+                });
+
+                codeInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        applyCodeBtn.click();
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
