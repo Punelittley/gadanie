@@ -766,31 +766,21 @@
     </footer>
     </div> <!-- /#reading-content-wrap -->
 
+    <!-- Криптографическая защита и роутер токенов Lava.top -->
+    <script src="scripts/access-guard.js?v=2.6"></script>
     <script>
         // СИСТЕМА КОНТРОЛЯ ДОСТУПА К ОПЛАЧЕННОМУ ПРОТОКОЛУ (PAYWALL)
         (function initPaywall() {
-            const VALID_KEYS = ['arcanum_7f9b2', 'arcanum_pass_2026', 'paid_access', 'ARCANUM2026'];
-            const urlParams = new URLSearchParams(window.location.search);
-            const passedKey = (urlParams.get('access') || urlParams.get('key') || '').trim();
-            const isDemo = urlParams.get('demo') === 'sample' || urlParams.get('from') === 'sample';
-            const storedAccess = localStorage.getItem('arcanum_paid_access');
-
-            // Автоматическое перенаправление на специализированную страницу тарифа при наличии параметра
-            const tariffParam = (urlParams.get('tariff') || '').toLowerCase();
-            const keyArg = passedKey ? `?key=${encodeURIComponent(passedKey)}` : '';
-            if (tariffParam.includes('день') || tariffParam.includes('day')) {
-                window.location.replace('reading-day.html' + keyArg);
-                return;
-            } else if (tariffParam.includes('отношен') || tariffParam.includes('love') || tariffParam.includes('союз')) {
-                window.location.replace('reading-love.html' + keyArg);
-                return;
-            } else if (tariffParam.includes('карьер') || tariffParam.includes('career') || tariffParam.includes('финанс')) {
-                window.location.replace('reading-career.html' + keyArg);
-                return;
-            } else if (tariffParam.includes('год') || tariffParam.includes('year')) {
-                window.location.replace('reading-year.html' + keyArg);
+            // Если передан зашифрованный токен или тариф - перенаправляем на целевую страницу
+            if (window.ArcanumGuard && ArcanumGuard.handleRouter()) {
                 return;
             }
+
+            const VALID_KEYS = ['arcanum_7f9b2', 'arcanum_pass_2026', 'paid_access', 'ARCANUM2026'];
+            const urlParams = new URLSearchParams(window.location.search);
+            const passedCandidate = (urlParams.get('auth') || urlParams.get('token') || urlParams.get('access') || urlParams.get('key') || '').trim();
+            const isDemo = urlParams.get('demo') === 'sample' || urlParams.get('from') === 'sample';
+            const storedAccess = localStorage.getItem('arcanum_paid_access');
 
             const contentWrap = document.getElementById('reading-content-wrap');
             const paywallEl = document.getElementById('reading-paywall-modal');
@@ -815,9 +805,10 @@
             }
 
             // Если передан валидный ключ в URL или доступ уже был активирован ранее
-            if (storedAccess === 'granted' || VALID_KEYS.includes(passedKey)) {
-                if (VALID_KEYS.includes(passedKey)) {
+            if (storedAccess === 'granted' || VALID_KEYS.includes(passedCandidate)) {
+                if (VALID_KEYS.includes(passedCandidate)) {
                     localStorage.setItem('arcanum_paid_access', 'granted');
+                    if (window.ArcanumGuard) ArcanumGuard.sanitizeAddressBar();
                 }
                 unlockReading();
             } else {

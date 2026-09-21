@@ -401,68 +401,10 @@
         </footer>
     </div>
 
-    <!-- Скрипт доступа -->
+    <!-- Защита доступа и проверка криптографических токенов -->
+    <script src="scripts/access-guard.js?v=2.6"></script>
     <script>
-        (function initPaywall() {
-            const VALID_KEYS = ['arcanum_pass_2026', 'arcanum_7f9b2', 'paid_access', 'ARCANUM2026'];
-            const urlParams = new URLSearchParams(window.location.search);
-            const passedKey = (urlParams.get('key') || urlParams.get('access') || '').trim();
-            const storedAccess = localStorage.getItem('arcanum_paid_access');
-
-            const contentWrap = document.getElementById('reading-content-wrap');
-            const paywallEl = document.getElementById('reading-paywall-modal');
-            const toggleCodeBtn = document.getElementById('toggle-code-btn');
-            const codeWrap = document.getElementById('paywall-code-wrap');
-            const codeInput = document.getElementById('manual-access-input');
-            const applyCodeBtn = document.getElementById('apply-code-btn');
-            const codeError = document.getElementById('paywall-code-error');
-
-            function unlock() {
-                if (contentWrap) contentWrap.classList.remove('blurred-content');
-                if (paywallEl) paywallEl.style.display = 'none';
-            }
-
-            function lock() {
-                if (contentWrap) contentWrap.classList.add('blurred-content');
-                if (paywallEl) paywallEl.style.display = 'flex';
-            }
-
-            if (storedAccess === 'granted' || VALID_KEYS.includes(passedKey)) {
-                localStorage.setItem('arcanum_paid_access', 'granted');
-                unlock();
-            } else {
-                lock();
-            }
-
-            if (toggleCodeBtn && codeWrap) {
-                toggleCodeBtn.addEventListener('click', () => {
-                    const isHidden = codeWrap.style.display === 'none';
-                    codeWrap.style.display = isHidden ? 'block' : 'none';
-                    if (isHidden && codeInput) codeInput.focus();
-                });
-            }
-
-            if (applyCodeBtn && codeInput) {
-                applyCodeBtn.addEventListener('click', () => {
-                    const code = codeInput.value.trim();
-                    if (VALID_KEYS.includes(code)) {
-                        localStorage.setItem('arcanum_paid_access', 'granted');
-                        if (codeError) codeError.style.display = 'none';
-                        unlock();
-                    } else {
-                        if (codeError) codeError.style.display = 'block';
-                        codeInput.classList.add('input-field-error');
-                    }
-                });
-
-                codeInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        applyCodeBtn.click();
-                    }
-                });
-            }
-        })();
+        ArcanumGuard.protectPage('year');
     </script>
 </body>
 </html>
