@@ -33,8 +33,8 @@ class Tarot3DScene {
     }
 
     init() {
-        const width = this.container.clientWidth || 460;
-        const height = this.container.clientHeight || 560;
+        const width = this.container.clientWidth || 360;
+        const height = this.container.clientHeight || 480;
 
         // 1. Сцена
         this.scene = new THREE.Scene();
@@ -49,7 +49,7 @@ class Tarot3DScene {
             alpha: true,
             powerPreference: 'high-performance'
         });
-        this.renderer.setSize(width, height);
+        this.renderer.setSize(width, height, false);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
         this.container.appendChild(this.renderer.domElement);
 
@@ -282,7 +282,7 @@ class Tarot3DScene {
             // Рубашкой к пользователю
             mesh.rotation.y = Math.PI;
             mesh.position.set((i + 1) * -0.07, (i + 1) * -0.06, (i + 1) * -0.1);
-            mesh.userData = { baseX: (i + 1) * -0.07, baseY: (i + 1) * -0.06, baseZ: (i + 1) * -0.1, idx: i + 1 };
+            mesh.userData = { baseX: (i + 1) * -0.07, baseY: (i + 1) * -0.06, baseZ: (i + 1) * -0.1, baseRotY: Math.PI, idx: i + 1 };
             this.deckGroup.add(mesh);
             this.sideCards.push(mesh);
         }
@@ -344,22 +344,24 @@ class Tarot3DScene {
 
     updateCameraDimensions() {
         if (!this.container || !this.camera) return;
-        const w = this.container.clientWidth || 400;
-        const h = this.container.clientHeight || 500;
+        const w = this.container.clientWidth || 320;
+        const h = this.container.clientHeight || 420;
         this.camera.aspect = w / h;
 
         // Адаптивное отдаление камеры в зависимости от ширины экрана
-        if (w < 400) {
-            this.camera.position.set(0, 0.05, 8.8);
-        } else if (w < 550) {
-            this.camera.position.set(0, 0.08, 7.8);
+        if (w < 380) {
+            this.camera.position.set(0, 0.05, 10.8);
+        } else if (w < 480) {
+            this.camera.position.set(0, 0.08, 9.4);
+        } else if (w < 600) {
+            this.camera.position.set(0, 0.1, 8.2);
         } else {
             this.camera.position.set(0, 0.15, 6.9);
         }
 
         this.camera.updateProjectionMatrix();
         if (this.renderer) {
-            this.renderer.setSize(w, h);
+            this.renderer.setSize(w, h, false);
         }
     }
 
@@ -428,10 +430,12 @@ class Tarot3DScene {
 
         // ДИНАМИЧЕСКИЙ РАЗЛЕТ КАРТ ПРИ СКРОЛЛЕ (3D Spread)
         const scrollFactor = Math.min(Math.max(this.scrollY / 500, 0), 2.2);
+        const isMobile = (this.container && this.container.clientWidth < 500);
+        const spreadX = isMobile ? 0.35 : 0.85;
 
         this.sideCards.forEach((mesh, idx) => {
             const dir = idx === 0 ? -1 : 1;
-            mesh.position.x = mesh.userData.baseX + dir * (scrollFactor * 0.85);
+            mesh.position.x = mesh.userData.baseX + dir * (scrollFactor * spreadX);
             mesh.position.y = mesh.userData.baseY - (scrollFactor * 0.4);
             mesh.position.z = mesh.userData.baseZ - (scrollFactor * 0.45);
             mesh.rotation.z = dir * (scrollFactor * 0.22);
