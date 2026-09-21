@@ -104,6 +104,38 @@
         }
     };
 
+    // Конфигурация сфер вопросов и значений позиций расклада
+    const SPHERE_CONFIG = {
+        love: {
+            title: "Любовь и Отношения",
+            pos1: "Исток чувств и скрытые мотивы в союзе",
+            pos2: "Точка текущего напряжения между вами",
+            pos3: "Совет Арканов и вектор развития пары",
+            masterIntro: "В вопросах отношений символы карт вскрывают не поверхностные слова, а подсознательные страхи и намерения каждого из партнеров."
+        },
+        finance: {
+            title: "Деньги и Карьера",
+            pos1: "Фундамент вашего текущего дохода и положение дел",
+            pos2: "Скрытые финансовые утечки и риски",
+            pos3: "Точка максимального финансового роста и совет",
+            masterIntro: "Материальный поток всегда следует за ясностью фокуса. Арканы подсвечивают, где вы неосознанно теряете ресурс."
+        },
+        choice: {
+            title: "Тупик и Развилка Пути",
+            pos1: "Истинная причина возникшей неопределенности",
+            pos2: "Что удерживает вас от шага вперед (страх / долг)",
+            pos3: "Какой путь откроет гармоничный выход из кризиса",
+            masterIntro: "Любой тупик — это сигнал, что старые шаблоны мышления исчерпали себя. Карты помогают увидеть скрытую развилку."
+        },
+        destiny: {
+            title: "Предназначение и Личный Путь",
+            pos1: "Ваш ключевой врожденный потенциал",
+            pos2: "Главный урок текущего жизненного этапа",
+            pos3: "Вектор раскрытия вашей истинной силы",
+            masterIntro: "Следование своему архетипу снимает внутреннее сопротивление и открывает доступ к врожденным ресурсам личности."
+        }
+    };
+
     // Текущее состояние ритуала
     const state = {
         step: 1,
@@ -374,6 +406,9 @@
         fanContainer.innerHTML = '';
 
         const total = 22;
+        const fanWidth = fanContainer.clientWidth || (window.innerWidth < 600 ? 320 : 640);
+        const spreadWidth = Math.min(fanWidth * 0.40, 260);
+        const isMobile = fanWidth < 520;
 
         state.shuffledCards.forEach((card, idx) => {
             const cardEl = document.createElement('div');
@@ -382,8 +417,8 @@
 
             const angle = -42 + (84 / (total - 1)) * idx;
             const rad = (angle * Math.PI) / 180;
-            const xOffset = Math.sin(rad) * 280;
-            const yOffset = (1 - Math.cos(rad)) * 60;
+            const xOffset = Math.sin(rad) * spreadWidth;
+            const yOffset = (1 - Math.cos(rad)) * (isMobile ? 36 : 56);
 
             cardEl.style.setProperty('--fan-angle', `${angle}deg`);
             cardEl.style.setProperty('--fan-x', `${xOffset}px`);
@@ -432,6 +467,10 @@
                 openSpreadBtn.onclick = () => {
                     goToStep5(); // Раскрытие триады и запуск ИИ-диалога
                 };
+                // Плавная прокрутка к кнопке для мгновенной ясности
+                setTimeout(() => {
+                    openSpreadBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 250);
             }
         }
     }
@@ -439,8 +478,22 @@
     function updateSelectedSlotsUI() {
         const sphereConfig = SPHERE_CONFIG[state.sphere] || SPHERE_CONFIG.love;
         const countBadge = document.getElementById('fan-picked-count');
+        const count = state.chosenCards.length;
+
         if (countBadge) {
-            countBadge.textContent = `Выбрано ${state.chosenCards.length} из 3 карт`;
+            if (count === 0) {
+                countBadge.innerHTML = `<i class="fas fa-hand-sparkles"></i> Шаг 1 из 3: вытяните 1-ю карту (<strong>${sphereConfig.pos1}</strong>)`;
+                countBadge.classList.remove('all-picked');
+            } else if (count === 1) {
+                countBadge.innerHTML = `<i class="fas fa-hand-sparkles"></i> Шаг 2 из 3: вытяните 2-ю карту (<strong>${sphereConfig.pos2}</strong>)`;
+                countBadge.classList.remove('all-picked');
+            } else if (count === 2) {
+                countBadge.innerHTML = `<i class="fas fa-hand-sparkles"></i> Шаг 3 из 3: вытяните 3-ю карту (<strong>${sphereConfig.pos3}</strong>)`;
+                countBadge.classList.remove('all-picked');
+            } else {
+                countBadge.innerHTML = `✦ <strong>Все 3 Аркана выбраны!</strong> Нажмите кнопку ниже для толкования ✦`;
+                countBadge.classList.add('all-picked');
+            }
         }
 
         for (let i = 1; i <= 3; i++) {
@@ -448,7 +501,8 @@
             const titleEl = document.getElementById(`picked-slot-label-${i}`);
             
             if (titleEl) {
-                titleEl.textContent = i === 1 ? sphereConfig.pos1 : (i === 2 ? sphereConfig.pos2 : sphereConfig.pos3);
+                const posName = i === 1 ? sphereConfig.pos1 : (i === 2 ? sphereConfig.pos2 : sphereConfig.pos3);
+                titleEl.textContent = `Позиция ${i}: ${posName}`;
             }
 
             if (!slotEl) continue;
@@ -456,19 +510,26 @@
             const card = state.chosenCards[i - 1];
             if (card) {
                 slotEl.classList.add('has-card');
+                slotEl.classList.remove('active-target');
                 slotEl.innerHTML = `
                     <div class="picked-card-preview">
                         <div class="preview-roman">${card.roman}</div>
                         <div class="preview-name">${card.name}</div>
-                        <div class="preview-status"><i class="fas fa-check"></i> Выбрана</div>
+                        <div class="preview-status"><i class="fas fa-check-circle"></i> Аркан выбран</div>
                     </div>
                 `;
             } else {
                 slotEl.classList.remove('has-card');
+                const isNext = (i === count + 1);
+                if (isNext) {
+                    slotEl.classList.add('active-target');
+                } else {
+                    slotEl.classList.remove('active-target');
+                }
                 slotEl.innerHTML = `
                     <div class="picked-slot-empty">
-                        <div class="slot-plus-icon">+</div>
-                        <span>Выберите карту из веера</span>
+                        <div class="slot-plus-icon">${isNext ? '<i class="fas fa-hand-pointer pulse-icon"></i>' : '+'}</div>
+                        <span>${isNext ? 'Коснитесь любой карты в веере выше' : 'Ожидает выбора'}</span>
                     </div>
                 `;
             }

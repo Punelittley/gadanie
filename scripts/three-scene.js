@@ -277,7 +277,7 @@ class Tarot3DScene {
         // Нижние карты колоды для объема и красивого разлета при скролле
         for (let i = 0; i < 2; i++) {
             const mesh = new THREE.Mesh(cardGeo, [
-                edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, frontMat, backMat
+                edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, backMat, backMat
             ]);
             // Рубашкой к пользователю
             mesh.rotation.y = Math.PI;
@@ -378,16 +378,11 @@ class Tarot3DScene {
         this.mainCardMesh.material[4].needsUpdate = true;
 
         const startTime = performance.now();
-        const duration = 1300; // 1.3 секунды роскошной плавной анимации
+        const duration = 1200; // 1.2 секунды кинематографичной анимации
 
-        // Начальный угол: если уже открыта — переворачиваем через рубашку
         const startRotY = this.mainCardMesh.rotation.y;
-        // Конечный угол: строго 0 (лицевая сторона обращена к камере)
-        // Вращение делаем вперед к зрителю
-        const targetRotY = startRotY === 0 ? Math.PI * 2 : 0;
-        const totalRot = targetRotY - startRotY;
-
-        const startZ = this.mainCardMesh.position.z;
+        // Если карта уже была открыта (повторный клик) — поворачиваем на 360°, если с рубашки — от Math.PI к 0
+        const totalRot = (startRotY === 0) ? Math.PI * 2 : -startRotY;
 
         const frameStep = (now) => {
             const elapsed = now - startTime;
@@ -402,8 +397,8 @@ class Tarot3DScene {
             this.mainCardMesh.rotation.y = startRotY + totalRot * ease;
 
             // Взлет карты вперед к зрителю и мягкое опускание
-            this.mainCardMesh.position.z = startZ + Math.sin(p * Math.PI) * 1.6;
-            this.mainCardMesh.position.y = Math.sin(p * Math.PI) * 0.45;
+            this.mainCardMesh.position.z = Math.sin(p * Math.PI) * 1.8;
+            this.mainCardMesh.position.y = Math.sin(p * Math.PI) * 0.4;
 
             if (p < 1) {
                 requestAnimationFrame(frameStep);
@@ -447,11 +442,10 @@ class Tarot3DScene {
             this.sacredAltarMesh.rotation.z += 0.0025;
         }
 
-        // Общий наклон колоды за курсором мыши
-        if (this.deckGroup && !this.isFlipping) {
-            const baseRotY = this.isRevealed ? 0 : Math.PI;
+        // Общий наклон колоды за курсором мыши (без резких рывков)
+        if (this.deckGroup) {
             this.deckGroup.rotation.x = -this.mouse.y * 0.18 + (scrollFactor * 0.06);
-            this.deckGroup.rotation.y = baseRotY + this.mouse.x * 0.25;
+            this.deckGroup.rotation.y = this.mouse.x * 0.25;
             this.deckGroup.position.y = Math.sin(performance.now() * 0.0014) * 0.08 - (scrollFactor * 0.25);
         }
 

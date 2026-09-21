@@ -2151,13 +2151,22 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 18px;
+    padding: 10px 22px;
     border-radius: var(--radius-full);
-    background: rgba(229, 185, 92, 0.15);
-    border: 1px solid var(--gold-500);
+    background: rgba(229, 185, 92, 0.12);
+    border: 1px solid rgba(229, 185, 92, 0.4);
     color: var(--gold-200);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: var(--transition-smooth);
+}
+
+.fan-picked-badge.all-picked {
+    background: linear-gradient(135deg, rgba(229, 185, 92, 0.28) 0%, rgba(107, 33, 168, 0.38) 100%);
+    border-color: var(--gold-400);
+    color: var(--gold-100);
+    box-shadow: 0 0 24px rgba(229, 185, 92, 0.35);
 }
 
 .tarot-fan-container {
@@ -2237,14 +2246,18 @@ body {
 .fan-back-corner.bottom-right { bottom: 6px; right: 6px; }
 
 /* 3 слота для выбранных карт */
-.picked-slots-grid {
+.picked-slots-grid, .picked-slots-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 24px;
     margin-bottom: 30px;
+    width: 100%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.picked-slot-item {
+.picked-slot-item, .picked-slot-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -2252,35 +2265,60 @@ body {
 }
 
 .picked-slot-title {
-    font-size: 0.8rem;
+    font-size: 0.84rem;
     color: var(--gold-300);
     font-weight: 600;
     text-align: center;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
     min-height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
+    line-height: 1.35;
 }
 
 .picked-slot-box {
     width: 100%;
-    height: 160px;
+    height: 165px;
     border: 2px dashed rgba(229, 185, 92, 0.35);
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(18, 9, 36, 0.5);
+    box-sizing: border-box;
     transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.picked-slot-box.active-target {
+    border-color: var(--gold-400);
+    background: rgba(36, 18, 68, 0.65);
+    box-shadow: 0 0 20px rgba(229, 185, 92, 0.25);
+    animation: pulseTargetSlot 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseTargetSlot {
+    0%, 100% { border-color: rgba(229, 185, 92, 0.35); box-shadow: 0 0 10px rgba(229, 185, 92, 0.1); }
+    50% { border-color: rgba(229, 185, 92, 0.85); box-shadow: 0 0 25px rgba(229, 185, 92, 0.35); }
+}
+
+.pulse-icon {
+    animation: bounceHand 1.2s infinite ease-in-out;
+    color: var(--gold-300);
+}
+
+@keyframes bounceHand {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
 }
 
 .picked-slot-box.has-card {
     border-style: solid;
     border-color: var(--gold-500);
-    background: linear-gradient(135deg, rgba(32, 16, 64, 0.9) 0%, rgba(14, 7, 28, 0.9) 100%);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, rgba(38, 19, 72, 0.95) 0%, rgba(14, 7, 28, 0.95) 100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(229, 185, 92, 0.2);
 }
 
 .picked-slot-empty {
@@ -2291,19 +2329,20 @@ body {
     color: var(--text-muted);
     font-size: 0.82rem;
     text-align: center;
-    padding: 12px;
+    padding: 14px;
 }
 
 .slot-plus-icon {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    border: 1px solid var(--border-subtle);
+    border: 1px solid rgba(229, 185, 92, 0.3);
+    background: rgba(229, 185, 92, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    color: var(--gold-500);
+    font-size: 1.15rem;
+    color: var(--gold-400);
 }
 
 .picked-card-preview {
@@ -2473,10 +2512,57 @@ body {
 
 .authenticity-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
     margin-top: 40px;
+}
+
+.auth-card {
+    background: linear-gradient(135deg, rgba(28, 14, 48, 0.75) 0%, rgba(14, 7, 28, 0.9) 100%);
+    border: 1px solid rgba(229, 185, 92, 0.22);
+    border-radius: var(--radius-lg);
+    padding: 34px 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    transition: var(--transition-smooth);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+}
+
+.auth-card:hover {
+    border-color: rgba(229, 185, 92, 0.55);
+    transform: translateY(-4px);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65), 0 0 25px rgba(229, 185, 92, 0.15);
+}
+
+.auth-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    border: 1px solid rgba(229, 185, 92, 0.35);
+    background: radial-gradient(circle, rgba(229, 185, 92, 0.2) 0%, rgba(229, 185, 92, 0.04) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.45rem;
+    color: var(--gold-300);
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.auth-card h4 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--gold-100);
+    margin-bottom: 12px;
+}
+
+.auth-card p {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0;
 }
 
 /* Реалистичный макет физического алтаря мастера */
@@ -2732,14 +2818,20 @@ body {
         height: 290px;
     }
     .tarot-fan-container {
-        height: 260px;
+        height: 230px;
+        margin-bottom: 20px;
     }
     .fan-card {
-        width: 75px;
-        height: 130px;
+        width: 58px;
+        height: 102px;
+        bottom: 10px;
     }
-    .picked-slots-grid {
+    .picked-slots-grid, .picked-slots-row {
         grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .picked-slot-box {
+        height: 130px;
     }
     .honesty-grid-table {
         grid-template-columns: 1fr;
