@@ -803,6 +803,52 @@ body {
     flex-shrink: 0;
 }
 
+.tariff-card-luxury {
+    background: 
+        radial-gradient(ellipse at 50% 0%, rgba(229, 185, 92, 0.14) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(32, 17, 56, 0.78) 0%, rgba(13, 7, 26, 0.94) 100%) !important;
+    border: 1px solid rgba(229, 185, 92, 0.32) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 235, 170, 0.2) !important;
+}
+
+.tariff-card-luxury:hover {
+    border-color: rgba(229, 185, 92, 0.75) !important;
+    box-shadow: 0 26px 55px rgba(0, 0, 0, 0.7), 0 0 30px rgba(229, 185, 92, 0.25), inset 0 1px 0 rgba(255, 235, 170, 0.4) !important;
+}
+
+.tariff-badge-subtle {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(18, 9, 36, 0.94);
+    border: 1px solid rgba(229, 185, 92, 0.5);
+    color: #F7DF94;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 12px rgba(229, 185, 92, 0.15);
+    white-space: nowrap;
+}
+
+.oracle-glow {
+    background: radial-gradient(circle, rgba(229, 185, 92, 0.25) 0%, rgba(22, 11, 44, 0.8) 100%) !important;
+    border: 1px solid rgba(229, 185, 92, 0.5) !important;
+    box-shadow: 0 0 18px rgba(229, 185, 92, 0.25) !important;
+    color: #FFF0BD !important;
+}
+
+.feature-star {
+    color: var(--gold-400);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+    text-shadow: 0 0 8px rgba(229, 185, 92, 0.5);
+}
+
 .service-price-block {
     margin-top: auto;
     padding-top: 20px;
@@ -816,9 +862,13 @@ body {
     font-size: 2.3rem;
     font-weight: 800;
     color: var(--gold-300);
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFF0BD 25%, #E5B95C 65%, #C3922E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
     line-height: 1;
     letter-spacing: -0.5px;
-    text-shadow: 0 0 16px rgba(229, 185, 92, 0.25);
+    filter: drop-shadow(0 2px 10px rgba(229, 185, 92, 0.25));
 }
 
 .service-price-sub {
@@ -840,6 +890,26 @@ body {
     border-radius: 14px;
     white-space: nowrap;
     transition: all 0.25s ease;
+}
+
+.btn-luxury-outline {
+    background: linear-gradient(180deg, rgba(229, 185, 92, 0.14) 0%, rgba(229, 185, 92, 0.04) 100%);
+    border: 1px solid rgba(229, 185, 92, 0.45);
+    color: #FFF0BD !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-luxury-outline:hover {
+    background: linear-gradient(135deg, #f7df94 0%, #d4a742 50%, #b88622 100%);
+    color: #0e071e !important;
+    border-color: #f7df94;
+    box-shadow: 0 8px 25px rgba(212, 167, 66, 0.45), 0 0 15px rgba(229, 185, 92, 0.3);
+    transform: translateY(-2px);
 }
 
 /* VIP карточка Годового Прогноза */
