@@ -143,10 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDailyCardUI(TAROT_CARDS[17]);
     }
 
-    // 3. Управление модальными окнами
+    // 3. Управление правовыми модальными окнами (Оферта и Политика)
     const modalOffer = document.getElementById('modal-offer');
     const modalPrivacy = document.getElementById('modal-privacy');
-    const modalOrder = document.getElementById('modal-order');
     const allModals = document.querySelectorAll('.modal-overlay');
 
     function openModal(modal) {
@@ -190,61 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
             openModal(modalPrivacy);
         });
     });
-
-    const serviceSelect = document.getElementById('order-service-select');
-    document.querySelectorAll('.order-service-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const serviceName = btn.getAttribute('data-service') || 'Персональный расклад';
-            if (serviceSelect) {
-                serviceSelect.value = serviceName;
-            }
-            openModal(modalOrder);
-        });
-    });
-
-    // 4. Отправка формы заказа (без эмодзи)
-    const orderForm = document.getElementById('order-form');
-    if (orderForm) {
-        orderForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById('order-name').value.trim();
-            const contact = document.getElementById('order-contact').value.trim();
-            const service = document.getElementById('order-service-select').value;
-            const question = document.getElementById('order-question').value.trim();
-            const consent = document.getElementById('order-consent').checked;
-
-            if (!consent) {
-                showToast('Необходимо подтвердить согласие с Публичной офертой');
-                return;
-            }
-
-            // Текст сообщения для Telegram куратора Оракула
-            const message = `ЗАЯВКА НА СЕАНС ОРАКУЛА АРКАНУМ\n\nИмя: ${name}\nКонтакт для связи: ${contact}\nТариф: ${service}\nОписание вопроса: ${question || 'Уточнить при диалоге'}\n\nС условиями Публичной оферты и Политикой конфиденциальности (152-ФЗ) ознакомлен(а). Возраст: 18+.`;
-
-            const telegramUsername = 'astral_tarot_master';
-            const tgUrl = `https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`;
-
-            showToast('Переход в Telegram...');
-            closeModal(modalOrder);
-            orderForm.reset();
-
-            // Надежный переход без асинхронной задержки (предотвращает блокировку попапа в Safari iOS)
-            const opened = window.open(tgUrl, '_blank');
-            if (!opened) {
-                window.location.href = tgUrl;
-            }
-        });
-    }
-
-    // Переход на страницу реальной оплаты Lava.top
-    const openDemoReadingBtn = document.getElementById('open-demo-reading-btn');
-    if (openDemoReadingBtn) {
-        openDemoReadingBtn.addEventListener('click', () => {
-            showToast('Переход к безопасной оплате картой или СБП...');
-        });
-    }
 
     // 5. FAQ Аккордеон
     const faqItems = document.querySelectorAll('.faq-item');
